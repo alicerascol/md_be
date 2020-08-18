@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:26257/be?sslmode=disable
+    username: root
+    password:
+    hikari:
+      auto-commit: false
+      connectionTimeout: 30000
+      maxLifetime: 300000
+      maximumPoolSize: 30
+    flyway:
+      locations: classpath:migration/cockroachdb
+      group: true
+    jpa:
+      open-in-view: false
+      show-sql: false
+      generate-ddl: false
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQL9Dialect
+          connection:
+            provider_disables_autocommit: true
+          temp:
+            use_jdbc_metadata_defaults: false
+      hibernate:
+        ddl-auto: validate
