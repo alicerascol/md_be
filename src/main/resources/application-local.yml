@@ -11,10 +11,11 @@ spring:
       maxLifetime: 300000
       maximumPoolSize: 30
     flyway:
-      locations: classpath:migration/cockroachdb
+      enabled: true
+      locations: classpath:db/migration
       group: true
     jpa:
-      open-in-view: false
+      open-in-view: true
       show-sql: false
       generate-ddl: false
       properties:

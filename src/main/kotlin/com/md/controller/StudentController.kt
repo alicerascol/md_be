@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*
 import com.md.service.StudentService
 
 
-@RestController("/students")
+@RestController
+@RequestMapping("/students")
 @Api(tags = ["Students"])
 class StudentController (val service: StudentService){
 
@@ -22,7 +23,7 @@ class StudentController (val service: StudentService){
         private val LOGGER = LoggerFactory.getLogger(StudentController::class.java)
     }
 
-    @GetMapping("/")
+    @GetMapping
     @ApiOperation(value = "Get all students")
     @ApiResponses(
         value = [

@@ -11,9 +11,10 @@ spring:
       connectionTimeout: 30000
       maxLifetime: 300000
       maximumPoolSize: 30
-#    flyway:
-#      locations: classpath:migration/cockroachdb
-#      group: true
+    flyway:
+      enabled: true
+      locations: classpath:db/migration
+      group: true
     jpa:
       open-in-view: false
       show-sql: false
@@ -28,11 +29,11 @@ spring:
       hibernate:
         ddl-auto: validate
 
-logging:
-  level:
-    root: WARN
-    Exposed: WARN
-    org.springframework: WARN
+#logging:
+#  level:
+#    root: WARN
+#    Exposed: WARN
+#    org.springframework: WARN
 
 management:
   endpoints:
@@ -50,6 +51,8 @@ management:
       mode: full
 
 
-
-
+#Constants
+azureBlobStorage:
+  ACCOUNT_NAME: alicerascol
+  ACCOUNT_KEY: zF7wjS+ci2XaWqNDyd3xfl5LJdky1xK2TLw7fPHvBP4K8Igzr+Dvs3aFJ4FEiA4AhN6IemwcxBVdPTT3ckFGUw==
 

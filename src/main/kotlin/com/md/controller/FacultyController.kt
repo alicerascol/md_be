@@ -11,17 +11,19 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import com.md.service.FacultyService
+import java.util.*
 
 
-@RestController("/faculties")
+@RestController
+@RequestMapping("/faculties")
 @Api(tags = ["Universities"])
-class FacultyController (val service: FacultyService){
+class FacultyController (val service: FacultyService) {
 
     companion object {
         private val LOGGER = LoggerFactory.getLogger(FacultyController::class.java)
     }
 
-    @GetMapping("/")
+    @GetMapping
     @ApiOperation(value = "Get all faculties")
     @ApiResponses(
         value = [
@@ -46,20 +48,53 @@ class FacultyController (val service: FacultyService){
         return errorResponse("Party not found", HttpStatus.NOT_FOUND)
     }
 
-    @PostMapping("/{faculty_id}")
-    @ApiOperation(value = "Add details")
+    @PostMapping
+    @ApiOperation(value = "Add new faculty")
     @ApiResponses(
         value = [
-            ApiResponse(code = 200, message = "Details about faculty added", response = FacultyDto::class),
+            ApiResponse(code = 200, message = "Add a new faculty", response = FacultyDto::class),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun addNewFaculty(): ResponseEntity<*> {
+        LOGGER.info("add a new faculty")
+        return errorResponse("Party not found", HttpStatus.NOT_FOUND)
+    }
+
+    @PostMapping("/{faculty_id}/container")
+    @ApiOperation(value = "Create Azure Container")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 200, message = "Create Azure Container for faculty", response = FacultyDto::class),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun createAzureContainerForFaculty(@PathVariable faculty_id: String): ResponseEntity<*> {
+        LOGGER.info("start creating a new container for the faculty %s", faculty_id)
+
+//        return service.getFaculty(UUID.fromString(faculty_id)).map { faculty ->
+//            service.createAzureContainer(faculty.container_name)
+            service.createAzureContainer("containername")
+//            ResponseEntity(faculty.container_name, HttpStatus.CREATED)
+            return ResponseEntity("faculty.container_name", HttpStatus.CREATED)
+//        }.orElse(errorResponse("Party not found", HttpStatus.NOT_FOUND) as ResponseEntity<String>?) as ResponseEntity<*>
+
+    }
+
+    @PostMapping("/{faculty_id}/login")
+    @ApiOperation(value = "Add new faculty")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 200, message = "Add a new faculty", response = FacultyDto::class),
             ApiResponse(code = 400, message = "Bad request"),
             ApiResponse(code = 500, message = "Internal error, try again later")]
     )
     fun login(@PathVariable faculty_id: String): ResponseEntity<*> {
-        LOGGER.info("start add details to a faculty")
+        LOGGER.info("add a new faculty")
         //each faculty will add an update JSON file in Azure Blob Storage
         return errorResponse("Party not found", HttpStatus.NOT_FOUND)
     }
 
-    private fun errorResponse(message: String, httpStatus: HttpStatus): ResponseEntity<Any> =
+    private fun errorResponse(message: String, httpStatus: HttpStatus): ResponseEntity<*> =
         ResponseEntity(ErrorDto(message), httpStatus)
 }

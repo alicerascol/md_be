@@ -1,10 +1,7 @@
 package com.md.dto
 
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 import javax.validation.constraints.Email
 
 @Entity
@@ -12,14 +9,17 @@ import javax.validation.constraints.Email
 data class StudentDto(
     @Id
     @Column(name = "student_id")
-    val student_id: UUID,
+    val student_id: UUID = UUID.randomUUID(),
 
-    val faculty_id: UUID,
+    @OneToMany
+    val faculty_id: List<FacultyDto>,
 
     val documents_link: String,
 
     @Email(message = "Email should be valid")
     val email: String,
 
-    val status: String
+    val status: StudentStatus
 )
+
+enum class StudentStatus { SIGNED_UP, VERIFIED, REGISTERED}

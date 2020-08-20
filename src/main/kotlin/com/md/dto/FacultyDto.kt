@@ -11,7 +11,13 @@ import javax.persistence.Table
 data class FacultyDto(
     @Id
     @Column(name = "faculty_id")
-    val faculty_id: UUID,
+    val faculty_id: UUID = UUID.randomUUID(),
 
-    val JSON_blob_storage_link: String
+    val faculty_name: String,
+
+    val university: String,
+
+    val JSON_blob_storage_link: String,
+
+    val container_name: String
 )

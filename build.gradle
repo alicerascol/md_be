@@ -25,6 +25,7 @@ buildscript {
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.72'
     id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id "org.flywaydb.flyway" version "6.5.5"
 }
 
 apply plugin: 'kotlin' // Required for Kotlin integration
@@ -67,6 +68,7 @@ dependencies {
     implementation("org.apache.tomcat.embed:tomcat-embed-websocket:9.0.35")
     implementation("io.micrometer:micrometer-core:1.2.1")
     implementation("io.micrometer:micrometer-registry-prometheus:1.2.1")
+    implementation("org.flywaydb:flyway-core:6.5.5")
 
     runtime("org.postgresql:postgresql:$postgresVersion")
 }
