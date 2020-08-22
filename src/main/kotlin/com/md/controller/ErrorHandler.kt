@@ -31,7 +31,7 @@ class ErrorHandler {
   @ExceptionHandler(HttpMessageNotReadableException::class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ResponseBody
-  fun handleMissingRequestBody(): ErrorDto {
+  fun handleMissingRequestBody(ex: HttpMessageNotReadableException): ErrorDto {
     return ErrorDto("Malformed JSON request")
   }
 

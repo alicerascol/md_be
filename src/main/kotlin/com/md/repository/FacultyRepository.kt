@@ -1,8 +1,8 @@
 package com.md.repository
 
-import com.md.dto.FacultyDto
-import org.springframework.data.repository.CrudRepository
+import com.md.dto.Faculty
+import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
 
-interface FacultyRepository : CrudRepository<FacultyDto, UUID>
+interface FacultyRepository : JpaRepository<Faculty, UUID>
