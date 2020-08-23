@@ -55,4 +55,6 @@ management:
 azureBlobStorage:
   ACCOUNT_NAME: alicerascol
   ACCOUNT_KEY: zF7wjS+ci2XaWqNDyd3xfl5LJdky1xK2TLw7fPHvBP4K8Igzr+Dvs3aFJ4FEiA4AhN6IemwcxBVdPTT3ckFGUw==
-
+emailService:
+  PASSWORD: Email_disertatie123
+  EMAIL: email123disertatie@gmail.com

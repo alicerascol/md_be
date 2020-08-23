@@ -1,11 +1,9 @@
 package com.md.dto
 
+import com.md.service.Utils
 import io.swagger.annotations.ApiModelProperty
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
@@ -15,40 +13,44 @@ import javax.validation.constraints.NotNull
 data class Faculty(
 
     @Id @GeneratedValue(generator = "system-uuid")
-    val faculty_id: UUID = UUID.randomUUID(),
+    @Column(unique=true)
+    val id: UUID = UUID.randomUUID(),
 
     @NotNull
-    val faculty_name: String,
+    @Column(unique=true)
+    val name: String,
 
     @Email(message = "Email should be valid")
     @NotNull
-    val faculty_email: String,
+    @Column(unique=true)
+    val email: String,
 
     @NotNull
-    val faculty_pass: String,
+    val password: String,
 
     @NotNull
     val university: String,
 
-    val JSON_blob_storage_link: String,
+    var JSON_blob_storage_link: String,
+
+    var config_file_name: String,
 
     val container_name: String
 )
 
 data class FacultyDto(
-
-    @ApiModelProperty(notes = "faculty_name", required = true)
+    @ApiModelProperty(notes = "name", required = true)
     @field: NotEmpty
-    val faculty_name: String,
+    val name: String,
 
     @Email(message = "Email should be valid")
-    @ApiModelProperty(notes = "faculty_email", required = true)
+    @ApiModelProperty(notes = "email", required = true)
     @field: NotEmpty
-    val faculty_email: String,
+    val email: String,
 
-    @ApiModelProperty(notes = "faculty_pass", required = true)
+    @ApiModelProperty(notes = "password", required = true)
     @field: NotEmpty
-    val faculty_pass: String,
+    val password: String,
 
     @ApiModelProperty(notes = "university", required = true)
     @field: NotEmpty
@@ -59,11 +61,12 @@ data class FacultyDto(
 fun FacultyDto.toFaculty(): Faculty {
     val f = this
     return Faculty(
-        faculty_name = f.faculty_name,
-        faculty_email = f.faculty_email,
-        faculty_pass = f.faculty_pass,
+        name = f.name,
+        email = f.email,
+        password = Utils.hashString(f.password),
         university = f.university,
         JSON_blob_storage_link =  "",
-        container_name =  ""
+        config_file_name = "",
+        container_name =  f.name.replace(" ","").toLowerCase()
     )
 }

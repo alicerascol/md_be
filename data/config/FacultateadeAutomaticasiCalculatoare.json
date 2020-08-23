@@ -1,0 +1,468 @@
+{
+    "id": "1",
+    "logo": "assets/logos/logo-upb-bucuresti.png",
+    "image": "assets/headers/header-upb-bucuresti.jpg",
+    "name": "Universitatea Politehnica din București",
+    "shortDescription": "În Universitatea POLITEHNICA din București sunt pregătiți oamenii fără de care societatea, așa cum o cunoaștem astăzi, nu ar putea funcționa – inginerii. Suntem un popor cu abilități tehnice moștenite, cu înclinare nativă pentru inginerie și, de multe ori, inginerii români și-au adăugat numele în panteonul științei mondiale.",
+    "description": "<p>Universitatea POLITEHNICA din București este cea mai veche și mai prestigioasă școală de ingineri din România, cu o tradiție acumulată în cei 200 de ani de existență și, prin eforturile unora dintre cei mai mari dascăli ai neamului nostru, îsi definește unicitatea prin crearea cunoașterii prin intermediul cercetării și inovării tehnologice, precum și prin implementarea ei prin educație și instruire profesională la nivel european.</p><p>In momentul de față, Universitatea POLITEHNICA din București are în componență 15 facultăți, iar  spațiile de învățământ sunt distribuite în trei campusuri distincte:<ul><li>Campus <strong>Polizu</strong> – Strada Polizu, nr. 1-7, sector 1</li><li>Campus <strong>Noul Local</strong> – Splaiul Independenței, nr 313, sector 6</li><li>Campus <strong>Leu</strong> – Bulevardul Iuliu Maniu, nr. 1-3, sector 6</li></ul></p>",
+    "bachelorDescription": "<ul><li>4 ani</li><li>240 Puncte credit</li><li>40 Domenii de studiu</li><li>85 de Programe de studiu</li><li>5000 Locuri la buget</li><li>1065 Locuri cu taxa</li><li>14.000 de Locuri de cazare in camine proprii</li><li>15 Facultati</li></ul>",
+    "masterDescription": "<ul><li>2 ani</li><li>120 Puncte credit</li><li>176 PRograme de studiu din care 32 de programe de studiu in limbi străine</li></ul>",
+    "mission": "<p>Universitatea POLITEHNICA din București (U.P.B.) își asumă misiunea de a pregăti specialiști în diferite domenii tehnice, capabili de a utiliza cunoștințe științifice, tehnice și cultural-umaniste valoroase, de a contribui la progresul tehnologic, economic și social-cultural al societății românesti și al lumii contemporane. UPB asigură realizarea unui învățământ de performanță, dezvoltat și perfecționat printr-o complexă activitate de cercetare, continuând tradiția Școlii Politehnice bucureștene, conform exigențelor și cu mijloacele oferite de societatea modernă informațională. Ea își propune să creeze noul profil de universitate tehnică, ce promovează forme de pregătire adaptate cerințelor unei societăți în plină competiție, supusă procesului de integrare în Comunitatea Europeană și internațională.</p><p>Misiunea sa principală este formarea inginerului capabil să se adapteze cerințelor economiei de piață și noilor tehnologii, care să aibă cunoștințe economice și manageriale și care să promoveze principiile de dezvoltare durabilă și de protejare a mediului înconjurător. Pentru aceasta el trebuie să fie format după principiul modern al participării directe la alegerea traiectoriei sale formative, să fie inclus într-un proces de învățare care să-i asigure șanse reale la competiția de pe piața liberă a forței de muncă.</p><p>Universitatea Politehnica din București are misiunea de a reuni sub un singur acoperiş educația, prin formarea profesională şi cercetarea ştiinţifică. Rolul acestei intersecții este de a spori cunoașterea şi inovarea, două concepte principale ale economiei şi societăţii bazate pe cunoaştere.</p><p>Într-un timp al globalizării, provocările devin din ce în ce mai complexe. Universitatea trebuie să dispună de un management puternic, autonomie universitară şi structuri de conducere relevante pentru a se integra. Instituţionalizarea câtorva acţiuni, cum ar fi: schimburile de studenţi, crearea conexiunilor în cercetarea ştiinţifică, cadrele didactice de renume pot ajuta la accelerarea procesului  şi la îmbunătăţirea educaţiei.</p><p>Cea mai importantă misiune a Universităţii constă în producerea de cunoaştere, prin cercetare ştiinţifică. Ea aplică pregătirea teoretică şi practică superioară în formarea profesională a studentului, cu scopul unei iniţieri în domeniul ales.</p>",
+    "country": "România",
+    "city": "București",
+    "website": "https://upb.ro/",
+    "mapUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d45579.75363062339!2d26.049493!3d44.438606!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf5d5aecb94fa6dc7!2sUniversity%20POLITEHNICA%20of%20Bucharest!5e0!3m2!1sen!2sro!4v1596285589268!5m2!1sen!2sro",
+    "address": "Splaiul Independenței 313, București 060042, România",
+    "emailContact": "relatii.publice@upb.ro",
+    "phone": "+ 40 21 402 9465",
+    "iban": ["RO42RNCB 0723 0005 0625 0270, CUI 4183199", "RO97BRDE 410S V980 6875 4100, CUI 4183199"],
+    "bank": ["Banca Comercială Română (BCR)", " Banca Română de Dezvoltare (BRD)"],
+    "faculties": [
+        {
+            "id": "3",
+            "logo": "assets/logos/logo-upb-acs.png",
+            "name": "Facultatea de Automatică și Calculatoare",
+            "description": "<p>Facultatea de Automatică și Calculatoare pregătește ingineri specialiști în domeniile Ingineria Sistemelor și Calculatoare și Tehnologia Informației, pe baza unor programe de studii moderne, în care aspectele teoretice sunt îmbinate cu excelența practică. Studenții facultății beneficiază de un mediu de învățământ competitiv care stimulează creativitatea, inițiativa științifică și tehnică, dezvoltarea personală și implicarea activă a viitorilor specialiști în construirea societății cunoașterii.</p><p>Facultatea de Automatică și Calculatoare pregătește ingineri în următoarele domenii: structura și arhitectura sistemelor de calcul, sisteme bazate pe microprocesoare, limbaje de programare, sisteme de aplicații software, inteligență artificială și sisteme expert (pentru studenții de la specializarea Calculatoare) și ingineria sistemelor de control, sisteme evoluate de conducere, roboți și sisteme automatizate de producție, bioinginerie și sisteme inteligente, automatizări industriale (pentru studenții de la specializarea de Automatică și Informatică Industrială).</p><p>Planul actual de învățământ este rezultatul a peste 50 de ani de experiență și evoluție, pe durata căreia a suferit mai multe modificări, urmărind îndeaproape progresele înregistrate în Automatică și Calculatoare. Datorită cursurilor organizate de Facultatea de Automatică și Calculatoare, diploma acordată este echivalentă cu diplomele celor mai prestigioase universități din lume.</p><p>Activitatea de cercetare din facultatea de Automatică și Calculatoare, precum și cele de proiectare, consulting și expertiză, sunt desfășurate în principal de către departamentele de specialitate, dar și de către centrele de cercetare din cadrul facultății, rezultatele din cercetare fiind un criteriu important pentru evaluarea aptitudinilor cadrelor didactice, fiind, în consecință, monitorizate cu mare atenție.</p>",
+            "brochure": "http://acs.pub.ro/doc/Brosura.pps",
+            "website": "https://acs.pub.ro/",
+            "address": "Splaiul Independentei nr. 313, Sector 6, Bucureşti, 060042, Acces prin Bulevardul Iuliu Maniu",
+            "emailContact": "decanat@acs.pub.ro; secretariat@acs.pub.ro",
+            "phone": "021 402 91 79",
+            "tax": "125 RON",
+            "bachelor": {
+                "applicationPeriod": ["1 iunie – 22 iunie ora 16:00", "5 Iulie ora 09:00 – 19 Iulie ora 16:00", "30 iulie ora 09:00 – 02 august ora 16:00"],
+                "numberOfPrograms": 2,
+                "brochure": "http://acs.pub.ro/public/Brousura_ACS_2017.pdf",
+                "rulebookAndDocuments": "https://admitere.pub.ro/docs/Regulament_admitere_licenta_2020.pdf",
+                "documents": [
+                    {
+                        "id": "7",
+                        "required": "1"
+                    },
+                    {
+                        "id": "10",
+                        "required": "1"
+                    },
+                    {
+                        "id": "2",
+                        "required": "1"
+                    },
+                    {
+                        "id": "3",
+                        "required": "1"
+                    },
+                    {
+                        "id": "4",
+                        "required": "1"
+                    },
+                    {
+                        "id": "12",
+                        "required": "1"
+                    },
+                    {
+                        "id": "1",
+                        "required": "1",
+                        "comments": "Se descarcă din Regulamentul de admitere"
+                    },
+                    {
+                        "id": "13",
+                        "required": "1"
+                    },
+                    {
+                        "id": "11",
+                        "required": "1"
+                    },
+                    {
+                        "id": "9",
+                        "required": "0"
+                    },
+                    {
+                        "id": "5",
+                        "required": "0"
+                    },
+                    {
+                        "id": "6",
+                        "required": "0"
+                    }
+                ],
+                "domains": [
+                    {
+                        "id": "1",
+                        "name": "",
+                        "programsOfStudy": [
+                            {
+                                "id": "1",
+                                "name": "Domeniul Calculatoare şi Tehnologia Informației cu specializarea Calculatoare şi Tehnologia Informației",
+                                "level": "Licență",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "După ce ați parcurs cu bine primii trei ani, în anul 4 veți alege unul din cele 5 specializări oferite de facultate. Fiecare specializare conține 4 sau 5 cursuri obligatorii pe parcursul a două semestre, restul de credite necesare fiind obținute prin alegerea unor cursuri din cadrul celorlalte specializări și dintr-un pachet de discipline opționale.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "https://acs.pub.ro/admitere/licenta/"
+                            },
+                            {
+                                "id": "2",
+                                "name": "Domeniul Ingineria Sistemelor cu specializarea Automatica si Informatica Aplicata",
+                                "level": "Licență",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "<p>Pentru acest domeniu, facultatea pune la dispoziția studenților din ultimul an șase specializări. Trei specializări sunt unite într-un pachet A - Sisteme de conducere a sistemelor industriale - cu 5 materii comune și 4 materii la alegere în funcție de specializare, iar alte 3 specializări sunt unite în mod similar într-un pachet B - Sisteme inteligente de conducere.</p> <p>Mai multe informații în legătură cu domeniul Ingineria Sistemelor, cât și descrieri detaliate ale materiilor din cadrul celor șase specializări, pot fi găsite pe www.acs.pub.ro.</p>",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "https://acs.pub.ro/admitere/licenta/"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "master": {
+                "numberOfPrograms": 24,
+                "applicationPeriod": ["29.06-07.07.2020", "17.08-08.09.2020"],
+                "brochure": "https://acs.pub.ro/master/ACS_BrosuraMaster_2020.pdf",
+                "rulebookAndDocuments": "https://upb.ro/wp-content/uploads/2020/03/REGULAMENT_Admitere_MASTERAT_2020-Final.pdf", 
+                "documents": [
+                    {
+                        "id": "1",
+                        "required": "1",
+                        "comments": "Anexa I din Regulamentul de admitere."
+                    },
+                    {
+                        "id": "2",
+                        "required": "1"
+                    },
+                    {
+                        "id": "3",
+                        "required": "1"
+                    },
+                    {
+                        "id": "5",
+                        "required": "1"
+                    },
+                    {
+                        "id": "6",
+                        "required": "1"
+                    },
+                    {
+                        "id": "10",
+                        "required": "1"
+                    },
+                    {
+                        "id": "7",
+                        "required": "1"
+                    },
+                    {
+                        "id": "8",
+                        "required": "0"
+                    },
+                    {
+                        "id": "12",
+                        "required": "1"
+                    },
+                    {
+                        "id": "9",
+                        "required": "0"
+                    },
+                    {
+                        "id": "14",
+                        "required": "1",
+                        "comments": "Inclusă in fișa de înscriere din Anexa 1 din regulamentul de admitere."
+                    },
+                    {
+                        "id": "15",
+                        "required": "1",
+                        "comments": "Anexa 2 din regulamentul de admitere."
+                    },
+                    {
+                        "id": "11",
+                        "required": "1"
+                    }
+                ],
+                "domains": [
+                    {
+                        "id": "2",
+                        "name": "Calculatoare și Tehnologia Informației",
+                        "programsOfStudy": [
+                            {
+                                "id": "3",
+                                "name": "Arhitecturi Avansate de Calculatoare",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul de studii universitare de masterat “ Arhitecturi Avansate de Calculatoare” (AAC) îşi asumă misiunea de a pregăti specialiști în domeniul Calculatoare şi Tehnologia Informaţiei. Programul oferă cunoștințe solide atât la nivel teoretic cât și practic în sisteme paralele și distribuite hardware și software, sisteme cu microprocesoare avansate, sau prelucrarea digitala a semnalelor. Cunoștințe despre modalități moderne de descriere, simulare și implementare a algoritmilor și sistemelor numerice în structuri VLSI reprogramabile. Aprofundarea paradigmei de sisteme de calcul VLSI-reconfigurabile. Abilități privind rezolvarea unor probleme concrete în condițiile utilizării de circuite FPGA, în vederea reducerii timpului de proiectare, a timpului de apariție pe piață a produsului proiectat, a costurilor, a puterii disipate, cât și a creșterii performanței.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/AAC-short-ro.pdf"
+                            },
+                            {
+                                "id": "4",
+                                "name": "Administrarea Bazelor de Date",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul de masterat în Administrarea bazelor de date (ABD) are ca scop oferirea cunoștințelor necesare pentru conceperea, proiectarea, dezvoltarea, mentenanța și administrarea aplicațiilor software avansate care au la bază sisteme de gestiune a bazelor de date relaționale și nu numai.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/ABD-short-ro.pdf"
+                            },
+                            {
+                                "id": "5",
+                                "name": "e-Guvernare",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul de masterat e-Guvernare (e-GOV) îşi asumă misiunea de a pregăti specialiști capabili de a utiliza cunoştinţe ştiinţifice, tehnice şi cultural-umaniste valoroase, de a contribui la progresul tehnologic, economic și social-cultural al societăţii şi al lumii contemporane, de se integra în societatea cunoaşterii. Programul specializează absolvenţii de învățământ superior tehnic în domeniul aplicaţiilor şi serviciilor software avansate.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/EGOV-short-ro.pdf"
+                            },
+                            {
+                                "id": "6",
+                                "name": "Grafica, Multimedia si Realitate Virtuala",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul de masterat GMRV susține o specializare reală, intensă pentru crearea de jocuri video, grafică, realitate virtuală și augmentată, multimedia, prelucrări de imagini și sunete, prin 12 (!) discipline ce dezvoltă multiplele cunoștințe și abilități necesare pentru angajare și performanță în aceste domenii profund creative.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/GMRV-short-ro.pdf"
+                            },
+                            {
+                                "id": "7",
+                                "name": "Inteligenta Artificiala – in engleza",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Engleză",
+                                "description": "Programul oferă cunoștințe aprofundate din domeniul inteligenței artificiale, atât la nivel algoritmic cât și la nivel de tehnologii, care permit construirea sistemelor inteligente artificiale, îmbunătățirea interacțiunii între utilizator și sistemele artificiale, cât și dezvoltarea aplicațiilor cognitive autonome, bazate pe agenți inteligenți, interfețe în limbaj natural, vedere artificială și învățare automată.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/AI-short-ro.pdf"
+                            },
+                            {
+                                "id": "8",
+                                "name": "Ingineria Sistemelor Internet",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul are ca scop oferirea cunoștințelor necesare pentru conceperea, proiectarea și dezvoltarea sistemelor informatice care au la bază, pe de o parte, metodele de reprezentare, căutare, prelucrare și utilizare a cunoștintelor (prelucrarea limbajului natural, învățare automată, ontologii, web semantic, agenti software inteligenți) și, pe de altă parte tehnologiile sistemelor distribuite răspândite pe scară largă (Internet și Web).",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/ISI-short-ro.pdf"
+                            },
+                            {
+                                "id": "9",
+                                "name": "Management in Tehnologia Informatiei",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Masteratul „Management în Tehnologia Informației” (MTI) pregătește specialiști în managementul organizațiilor și produselor ICT. Tehnologiile informației și comunicării au un rol critic în economia globală și în societatea românească. MTI pregătește inginerii ICT și alți profesioniști pentru a gestiona oportunitățile și riscurile specifice noilor infrastructuri și tehnologii informatice.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/MTI-short-ro.pdf"
+                            },
+                            {
+                                "id": "10",
+                                "name": "Securitatea Retelelor Informatice Complexe",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul SRIC dezvoltă competențele necesare inginerilor implicați în proiectarea, administrarea și securizarea rețelelor de calculatoare, administrarea serviciilor de rețea, auditarea securității rețelelor, identificarea și diagnoza vulnerabilităților unui sistem informatic.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/SRIC-short-ro.pdf"
+                            },
+                            {
+                                "id": "11",
+                                "name": "Servicii Software Avansate",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul de Master SSA oferă cunoștințele necesare pentru conceperea, proiectarea și dezvoltarea serviciilor software avansate, care au la bază, pe de o parte, tehnologiile sistemelor distribuite răspândite pe scară largă (Internet, Web, Cloud, platforme Big Data, platforme mobile) și, pe de altă parte, metodele de proiectare a aplicațiilor bazate pe servicii. Sunt vizate aspecte de evaluarea performanțelor și optimizări în proiectarea serviciilor software avansate. Modulul vizează educarea unor specialiști cu înaltă pregătire într-un domeniu foarte actual și important pentru cercetarea în tehnologia informației, precum și pentru valorificarea inovării în companiile de profil implicate în dezvoltarea unor produselor informatice cu un grad ridicat de complexitate.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/SSA-short-ro.pdf"
+                            },
+                            {
+                                "id": "12",
+                                "name": "Sisteme de Calcul Paralele si Distribuite – in engleza",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Engleză",
+                                "description": "Programul de master SCPD are ca scop pregătirea specialiștilor în domeniul sistemelor de calcul paralele și distribuite. Subiectele se referă la conceperea, proiectarea, implementarea și evaluarea performanțelor sistemelor paralele și distribuite moderne (Cloud Computing, Edge Computing, Fog Computing, Mobile Cloud și sisteme pervasive, platforme Big Data, Datacenters, Peer-to-Peer, etc.) și a aplicațiilor acestora. Vor fi prezentate probleme de actualitate și soluții folosite, într-un domeniul care experimentează, validează și promovează inovațiile ce conduc spre produse de vârf ale științei și ingineriei calculatoarelor.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/SCPD-short-ro.pdf"
+                            },
+                            {
+                                "id": "13",
+                                "name": "Sisteme avansate de securitate – in engleza",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Engleză",
+                                "description": "Pregătirea unor experți în domeniul securității cibernetice oferă cadrul necesar implementării corecte a instrumentelor de securitate la nivelul organizațiilor. Guvernanța electronică impune standarde de securitate cibernetică concomitent cu apariția, unor noi vulnerabilități, riscuri și amenințări la adresa securității organizațiilor. Necesitatea existenței unor experți în domeniul securității cibernetice se impune de la sine întro societate în care informația electronică este atotcuprinzătoare.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/SAS-short-ro.pdf"
+                            },
+                            {
+                                "id": "14",
+                                "name": "Sisteme de programe financiare – in engleza",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Engleză",
+                                "description": "Programul de masterat Financial Computing, în limba engleză, pregătește specialiști în domeniul sistemelor de programe pentru bănci și instituții financiare, care vor putea lucra în echipe mari, internaționale, responsabile de dezvoltarea unor soluții software complexe pentru gestiunea, proiectarea și mentenanța produselor IT bancare. Experiența completă de creare, utilizare și mentenanță a programelor complexe din domeniul financiar le va permite absolvenților să dezvolte aplicații bancare pentru care scalabilitatea, performanța și fiabilitatea sunt elemente esențiale.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/SPF-short-ro.pdf"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 3,
+                        "name": "Ingineria Sistemelor",
+                        "programsOfStudy": [
+                            {
+                                "id": "15",
+                                "name": "Control Avansat si Sisteme in Timp Real",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul asigură îmbogățirea cunoștințelor teoretice și de specialitate, dobândite anterior, pentru proiectarea și implementarea unor soluții moderne de conducere a proceselor industriale și a aplicațiilor informatice de mare complexitate.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/CASTR-short-ro.pdf"
+                            },
+                            {
+                                "id": "16",
+                                "name": "Sisteme Inteligente de Conducere",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "COGITATIO EX MACHINA: un sistem inteligent este capabil să demonstreze în mod autonom și adaptiv cât mai multe capacități cognitive de nivel înalt (percepția, acțiunea, învățarea, planificarea, memoria, decizia, recunoașterea limbajului, emoția etc.). Abordăm numeroase provocări și probleme de cercetare: cum definim abilitățile cognitive, cum le analizăm, cum le modelăm, cum proiectăm și optimizăm o aplicare a tehnicilor inteligente în rezolvarea unei probleme reale.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/SIC-short-ro.pdf"
+                            },
+                            {
+                                "id": "17",
+                                "name": "Sisteme Complexe – în engleză",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Engleză",
+                                "description": "<p>COMPLEX IS THE NEW SIMPLE: Avansul tehnologic foarte rapid conduce la o creștere majoră a complexității sistemelor studiate în multe domenii inginerești. Sistemele de conducere au devenit integrate în viața de zi cu zi, sunt de mari dimensiuni, heterogene și complexe. Necesită algoritmi și metode de proiectare specifice.</p> <p>Vă oferim competențe aplicative în proiectarea, analiza, și conducerea de sisteme complexe, mai ales în lumina dezvoltării accelerate a sistemelor Smart (Smart Cities, Smart Energy, Smart Transportation etc.) agreate intens și la nivel operațional european. Suntem la zi cu rezultatele științifice curente la nivel global, iar profesorii noștri, cu rezultate în cercetare de nivel mondial, vă vor implica în proiecte de noutate internaţională.</p>",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/CS-short-ro.pdf"
+                            },
+                            {
+                                "id": "18",
+                                "name": "Automatica si Informatica Industriala",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul pregătește specialiști în domeniul Ingineria Sistemelor, venind din diverse pregătiri inginerești de licență, capabili de a utiliza cunoştinţe ştiinţifice și tehnice avansate, de a contribui la progresul tehnologic, economic și social-cultural al societăţii româneşti şi al lumii avansate. În particular, programul are drept misiune dobândirea de cunoștințe tehnice avansate în domeniul informaticii industriale, programarea, exploatarea și mentenanța sistemelor informatice, de control și comunicație în procesele industriale, participarea inovativcreatoare la proiecte de cercetare, pregătirea practică alături de firme consacrate.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/AII-short-ro.pdf"
+                            },
+                            {
+                                "id": "19",
+                                "name": "Managementul si Protectia Informatiei",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul de masterat pregăteşte specialiști în domeniul Ingineriei Sistemelor şi are ca misiune specializarea absolvenţilor de învățământ superior tehnic în domeniul manipularii si protectiei informatiilor în format electronic.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/MPI-short-ro.pdf"
+                            },
+                            {
+                                "id": "20",
+                                "name": "Prelucrari Complexe de Semnal in Aplicatii Multimedia",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Multimedia, ca atribut al sistemelor sau aplicaţiilor, semnifică un ansamblu de date, text, sunet, imagini statice sau dinamice, grafică și animaţii, stocate pe un suport digital și accesibile interactiv. Abordarea \"în regim multimedia\" înseamnă utilizarea unor tehnologii care fac posibile aceste lucruri.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/PCSAM-short-ro.pdf"
+                            },
+                            {
+                                "id": "21",
+                                "name": "Service Engineering and Management – in engleza",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Engleză",
+                                "description": "Programul de master ”Ingineria ṣi Managementul Serviciilor” (SEM) răspunde unei cereri formulate la nivel mondial în ceea ce privește cresterea si inovarea serviciilor. Pe măsură ce serviciile devin o parte tot mai importantă a creării de valoare în societatile si economiile moderne, si crește complexitatea și anvergura serviciilor global dispersate, devine necesara modelarea, dezvoltarea si functionarea integrata a unor sisteme pentru servicii centrate pe client, sustenabile, bazate pe abordari interdisciplinare (inginerie, management, marketing, pshihologie umana) cu suport informatic ce utilizeaza tehnologii avansate: Web, Cloud, SOA.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/SEM-short-ro.pdf"
+                            },
+                            {
+                                "id": "22",
+                                "name": "Sisteme Informatice in Medicina",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "În medicină, ca și în multe alte zone ale economiei, va exista o competiție deosebită pentru noi experiențe de servicii care să iasă în evidență nu doar prin cost redus și productivitate (funcționalitate și standardizare) ci și prin satisfacerea nevoilor individuale, confort și protecție socială (expresie și personalizare). Programul propune o coerență conceptuală și strategică între proiectarea arhitecturilor hardware și software care asigură și managementul optimizat al acestui sistem.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/SIM-short-ro.pdf"
+                            },
+                            {
+                                "id": "23",
+                                "name": "Sisteme Informatice Integrate",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Programul de master SII are ca scop pregătirea unor specialiști care să fie capabili să integreze la nivel de intreprindere toate sistemele informatice necesare funcționării, într-o manieră unitară, modulară și deschisă, care să ofere în același timp simplitate conceptuală, robustețe funcțională și capacități de reconfigurare a sistemului în funcție de evoluția intreprinderii. În acest scop sunt necesare atât competențe în domeniul ingineriei sistemelor cât și în domeniul sistemelor informaționale, cu un accent în domeniul interoperabilității.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/SII-short-ro.pdf"
+                            },
+                            {
+                                "id": "24",
+                                "name": "Sisteme Cyber-Fizice – în engleză",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Engleză",
+                                "description": "Programul de master are ca scop pregătirea unor specialiști care să dețină viziunea integratoare a sistemelor de calcul, de comunicații și de conducere pentru procese fizice heterogene, complexe și de mari dimensiuni, a căror funcționare trebuie să corespundă unui ansamblu de performanțe impuse.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/CPS-short-ro.pdf"
+                            },
+                            {
+                                "id": "25",
+                                "name": "Robotica si Automatizari – în engleza",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Engleză",
+                                "description": "Programul de master ”Robotics and Automation” vizează formarea de specialişti în domeniul Ingineriei Sistemelor capabili să satisfacă cerinţele pieţei muncii pentru personal înalt calificat în noile tehnologii digitale de robotică şi automatizare ale ’Industriei viitorului’.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/RA-short-ro.pdf"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "4",
+                        "name": "Inginerie și Management",
+                        "programsOfStudy": [
+                            {
+                                "id": "26",
+                                "name": "Ingineria si Managementul Sistemelor de Afaceri",
+                                "level": "Master",
+                                "attendanceType": "Cu frecvență",
+                                "teachingLanguage": "Română",
+                                "description": "Integrarea conceptelor inginerești în raport cu cele economice pentru a oferi rigoarea unor abordări sistemice, capabile să conducă mai rapid la performanța pe o piață în permanentă schimbare. Un bun manager trebuie să știe să înțeleagă, să discearnă, să gestioneze și să optimizeze traiectoria firmei în raport cu piața concurențială.",
+                                "emailContact": "admitere@acs.pub.ro",
+                                "phone": "+40 21 402 9465",
+                                "website": "http://acs.pub.ro/doc/master/ro/short_description/IMSA-short-ro.pdf"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

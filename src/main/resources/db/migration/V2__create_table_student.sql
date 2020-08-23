@@ -1,9 +1,9 @@
 CREATE TABLE student
 (
-	student_id UUID NOT NULL,
+	id UUID UNIQUE NOT NULL,
 	documents_link VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL,
+	email VARCHAR(255) UNIQUE NOT NULL,
 	status VARCHAR(255) NOT NULL,
-	faculty_id UUID REFERENCES faculty(faculty_id),
-	PRIMARY KEY (student_id ASC)
+	faculty_id UUID REFERENCES faculty(id),
+	PRIMARY KEY (id ASC)
 );
