@@ -129,7 +129,7 @@ class FacultyController(val service: FacultyService) {
         return service.getFacultyById(faculty_id)
             .map { faculty ->
                 val facultyDetails = service.readFileDirectlyAsText(faculty.config_file_name)
-                ResponseEntity("Document downloaded", HttpStatus.OK) }
+                ResponseEntity(facultyDetails, HttpStatus.OK) }
             .orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
     }
 
@@ -168,7 +168,6 @@ class FacultyController(val service: FacultyService) {
                 else ResponseEntity("Incorrect password", HttpStatus.BAD_REQUEST)
             }
             .orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
-
     }
 
 }

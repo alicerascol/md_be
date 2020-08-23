@@ -21,7 +21,7 @@ class FacultyService(
         private val LOGGER = LoggerFactory.getLogger(FacultyService::class.java)
     }
 
-    private val localPath = "/Users/arascol/Documents/alice/disertatie/be/data/config"
+    private val localPath = "/Users/arascol/Documents/alice/disertatie/be/data/"
 
 
     fun addNewFaculty(facultyDto: FacultyDto):  Optional<Faculty> {
@@ -59,7 +59,7 @@ class FacultyService(
 
     fun readFileDirectlyAsText(configFileName: String): String {
         LOGGER.info("readFileDirectlyAsText")
-        return File(localPath + configFileName).readText(Charsets.UTF_8)
+        return File(localPath + "config/" +configFileName).readText(Charsets.UTF_8)
     }
 
 }
