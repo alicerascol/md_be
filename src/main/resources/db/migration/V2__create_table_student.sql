@@ -1,7 +1,7 @@
 CREATE TABLE student
 (
 	id UUID UNIQUE NOT NULL,
-	documents_link VARCHAR(255) NOT NULL,
+	director VARCHAR(255) NOT NULL,
 	email VARCHAR(255) UNIQUE NOT NULL,
 	status VARCHAR(255) NOT NULL,
 	faculty_id UUID REFERENCES faculty(id),

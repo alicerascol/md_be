@@ -30,8 +30,8 @@ class StudentService(
                 studentDto = parseFileToGetInfo(studentDocument, faculty)
             }
         }
-        val studentDirector = studentDto?.firstName?.toLowerCase() + studentDto?.lastName?.toLowerCase() + studentDto?.father_initials?.toLowerCase();
-        azureBlobStorageService.saveStudentDocuments(faculty.container_name, studentDocuments, studentDirector)
+
+        azureBlobStorageService.saveStudentDocuments(faculty.container_name, studentDocuments, studentDto!!.director)
         return studentRepository.save(studentDto?.toStudent())
     }
 
@@ -45,9 +45,17 @@ class StudentService(
         return Optional.of(studentRepository.save(student))
     }
 
-//    fun getStudentsFiltered(faculty_id: UUID, studentStatus: String): Optional<List<Student>> {
-//        return Optional.of(studentRepository.findByFacultyIdsAndStatus(faculty_id, studentStatus))
-//    }
+    fun getStudentDocuments(containerName: String, student: Student):  ArrayList<String>  {
+        LOGGER.info("getStudentDocuments")
+        return azureBlobStorageService.getStudentDocuments(containerName, student.director)
+    }
+
+    fun getStudentsFiltered(faculty: Faculty, studentStatus: String): List<Student>? {
+        if(studentStatus == "all")
+            return faculty.students
+
+        return faculty.students?.filter {student -> student.status ==  StudentStatus.valueOf(studentStatus)}
+    }
 
     fun parseFileToGetInfo(studentInfo: MultipartFile, faculty: Faculty): StudentDto {
         val fileContent = JSONObject(String(studentInfo.bytes))
@@ -62,6 +70,8 @@ class StudentService(
         val citizenship: String? = generalInformation?.getString("citizenship")
         val phone: String? = generalInformation?.getString("phone")
 
-        return StudentDto(email!!, firstName!!, lastName!!, fatherInitials!!, citizenship!!, phone!!, mutableListOf(faculty))
+        var studentDirector = firstName?.toLowerCase() + lastName?.toLowerCase() + fatherInitials?.toLowerCase()
+
+        return StudentDto(email!!, firstName!!, lastName!!, fatherInitials!!, citizenship!!, phone!!, studentDirector, mutableListOf(faculty))
     }
 }

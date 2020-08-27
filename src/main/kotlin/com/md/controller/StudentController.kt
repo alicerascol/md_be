@@ -15,9 +15,11 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import com.md.service.StudentService
 import com.md.service.email.EmailService
+import org.json.JSONObject
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import javax.validation.Valid
+import kotlin.collections.HashMap
 
 
 @RestController
@@ -46,22 +48,25 @@ class StudentController (val service: StudentService,
             .orElse(ResponseEntity("Students not found", HttpStatus.NOT_FOUND))
     }
 
-//    @GetMapping("/filtered")
-//    @ApiOperation(value = "Get all students filtered by faculty and status")
-//    @ApiResponses(
-//        value = [
-//            ApiResponse(code = 200, message = "Get all students filtered by faculty and status"),
-//            ApiResponse(code = 400, message = "Bad request"),
-//            ApiResponse(code = 500, message = "Internal error, try again later")]
-//    )
-//    fun getAllStudentsFiltered(@RequestParam faculty_id: UUID,
-//                               @RequestParam status: String): ResponseEntity<*> {
-//        LOGGER.info("Get all students filtered by faculty and status")
-//
-//        return service.getStudentsFiltered(faculty_id, status)
-//            .map { studentsList -> ResponseEntity<Any>(studentsList, HttpStatus.OK) }
-//            .orElse(ResponseEntity("Students not found", HttpStatus.NOT_FOUND))
-//    }
+    @GetMapping("/{faculty_id}/filtered/{status}")
+    @ApiOperation(value = "Get all students filtered by faculty and status")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 200, message = "Get all students filtered by faculty and status"),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun getAllStudentsFiltered(@PathVariable faculty_id: UUID,
+                               @PathVariable status: String): ResponseEntity<Any>? {
+        LOGGER.info("Get all students filtered by faculty and status")
+
+        return facultyService.getFacultyById(faculty_id)
+            .map { faculty ->
+                val studentList = service.getStudentsFiltered(faculty, status)
+                ResponseEntity<Any>(studentList, HttpStatus.OK) }
+            .orElse(ResponseEntity(HttpStatus.NOT_FOUND))
+
+    }
 
     @GetMapping("/{student_id}")
     @ApiOperation(value = "Get student by id")
@@ -136,6 +141,30 @@ class StudentController (val service: StudentService,
                 emailService.sendEmail(student.email, emailDto)
                 ResponseEntity<Any>("Email sent to the student " + student.email, HttpStatus.OK) }
             .orElse(ResponseEntity("Student not found", HttpStatus.NOT_FOUND))
+    }
+
+    @GetMapping("/{faculty_id}/{student_id}/documents")
+    @ApiOperation(value = "Send status email for student")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 201, message = "student"),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun getStudentDocuments(@PathVariable faculty_id: UUID, @PathVariable student_id: UUID):  ResponseEntity<*>  {
+        LOGGER.info("Get students' documents")
+        return facultyService.getFacultyById(faculty_id)
+            .map {faculty ->
+                service.getStudent(student_id)
+                    .map { student ->
+                        val blobUrls = service.getStudentDocuments(faculty.container_name, student)
+                        val response = HashMap<String, String>()
+                        response["email"] = student.email
+                        response["documents"] = blobUrls.toString()
+                        ResponseEntity<Any>(response, HttpStatus.OK)
+                    }
+                    .orElse(ResponseEntity("Student not found", HttpStatus.NOT_FOUND))
+            }.orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
     }
 
 }

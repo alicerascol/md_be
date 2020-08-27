@@ -8,7 +8,6 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
-import javafx.application.Application.launch
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -149,7 +148,7 @@ class FacultyController(val service: FacultyService) {
 //    }
 
     @PostMapping("/login")
-    @ApiOperation(value = "Add new faculty")
+    @ApiOperation(value = "Login faculty")
     @ApiResponses(
         value = [
             ApiResponse(code = 200, message = "Add a new faculty", response = FacultyDto::class),

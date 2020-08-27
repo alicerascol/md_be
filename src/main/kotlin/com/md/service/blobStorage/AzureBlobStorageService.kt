@@ -118,6 +118,20 @@ class AzureBlobStorageService {
         uploadStudentFilesToContainer(studentsDocuments, containerName, studentName)
     }
 
+    fun getStudentDocuments(containerName: String, studentDirector: String):  ArrayList<String> {
+        val storageClient = createBlobServiceClient()
+        val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
+        val blobNames: List<String> = getContainerBlobs(containerName)
+        val blobUrls = ArrayList<String>();
+        for(blobName in blobNames) {
+            if(blobName.contains(studentDirector.take(studentDirector.length-2))) {
+                val blobClient: BlobClient = containerClient.getBlobClient(blobName)
+                blobUrls.add(blobClient.blobUrl)
+            }
+        }
+        return blobUrls
+    }
+
     fun getAllContainers(): ArrayList<String> {
         val storageClient = createBlobServiceClient()
         val containers: PagedIterable<BlobContainerItem>? = storageClient.listBlobContainers()
@@ -131,7 +145,7 @@ class AzureBlobStorageService {
         return containersNames
     }
 
-    fun getContainerBlobs(containerName: String) {
+    fun getContainerBlobs(containerName: String): List<String> {
         val storageClient = createBlobServiceClient()
         val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
 
@@ -140,7 +154,7 @@ class AzureBlobStorageService {
         for (blobItem in containerClient.listBlobs()) {
             blobNames.add(blobItem.name)
         }
-
+        return blobNames
     }
 
     @Throws(IOException::class)

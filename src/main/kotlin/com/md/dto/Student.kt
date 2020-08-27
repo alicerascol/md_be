@@ -22,8 +22,6 @@ data class Student(
     @JsonBackReference
     val faculties: MutableList<Faculty> = mutableListOf(),
 
-    var documents_link: String,
-
     @Email(message = "Email should be valid")
     val email: String,
 
@@ -36,6 +34,8 @@ data class Student(
     val citizenship: String,
 
     val phone: String,
+
+    val director: String,
 
     var status: StudentStatus
 )
@@ -55,6 +55,8 @@ data class StudentDto(
 
     val phone: String,
 
+    var director: String,
+
     var faculties: MutableList<Faculty>? = mutableListOf()
 )
 
@@ -66,11 +68,11 @@ fun StudentDto.toStudent(): Student {
         email = s.email,
         status = StudentStatus.REGISTERED,
         faculties = s.faculties!!,
-        documents_link =  "",
         firstName = s.firstName,
         lastName = s.lastName,
         father_initials = s.father_initials,
         citizenship = s.citizenship,
-        phone = s.phone
+        phone = s.phone,
+        director = s.director
     )
 }
