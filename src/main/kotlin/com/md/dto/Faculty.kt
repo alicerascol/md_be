@@ -1,7 +1,10 @@
 package com.md.dto
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.md.service.Utils
 import io.swagger.annotations.ApiModelProperty
+import org.jetbrains.annotations.Nullable
 import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Email
@@ -31,12 +34,27 @@ data class Faculty(
     @NotNull
     val university: String,
 
+    @ManyToMany(mappedBy = "faculties", cascade = [CascadeType.DETACH])
+    @JsonManagedReference
+    var students: List<Student>? = mutableListOf(),
+
     var JSON_blob_storage_link: String,
 
     var config_file_name: String,
 
     val container_name: String
-)
+) {
+    override fun toString(): String {
+        return "faculty(id=$id, " +
+                "name=$name, " +
+                "email=$email, " +
+                "password=$password, " +
+                "university=$university, " +
+                "JSON_blob_storage_link=$JSON_blob_storage_link, " +
+                "config_file_name=$config_file_name, " +
+                "container_name=$container_name )"
+    }
+}
 
 data class FacultyDto(
     @ApiModelProperty(notes = "name", required = true)
@@ -54,7 +72,9 @@ data class FacultyDto(
 
     @ApiModelProperty(notes = "university", required = true)
     @field: NotEmpty
-    val university: String
+    val university: String,
+
+    val students: List<StudentDto>? = mutableListOf()
 )
 
 
@@ -67,6 +87,7 @@ fun FacultyDto.toFaculty(): Faculty {
         university = f.university,
         JSON_blob_storage_link =  "",
         config_file_name = "",
+        students = f.students?.map { studentDto: StudentDto -> studentDto.toStudent() },
         container_name =  f.name.replace(" ","").toLowerCase()
     )
 }

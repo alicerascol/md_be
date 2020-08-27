@@ -58,8 +58,7 @@ class FacultyService(
     }
 
     fun readFileDirectlyAsText(configFileName: String): String {
-        LOGGER.info("readFileDirectlyAsText")
-        return File(localPath + "config/" +configFileName).readText(Charsets.UTF_8)
+        return Utils.readFileDirectlyAsText(configFileName, localPath)
     }
 
 }

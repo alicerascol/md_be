@@ -11,12 +11,10 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
-import java.io.File
 import java.io.IOException
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
-import kotlinx.coroutines.*
 
 @Component
 class AzureBlobStorageService {
@@ -82,10 +80,29 @@ class AzureBlobStorageService {
         val blobClient: BlobClient = containerClient.getBlobClient("config/$filename")
 
         // Upload the blob
-        blobClient.uploadFromFile(localPath + filename)
+        blobClient.uploadFromFile(localPath + filename, true)
         LOGGER.info("File uploaded in Blob storage as blob: ${blobClient.blobUrl}")
 
         return blobClient.blobUrl
+    }
+
+    fun uploadStudentFilesToContainer(studentFiles: List<MultipartFile>, containerName: String, studentName: String) {
+        val storageClient = createBlobServiceClient()
+        val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
+
+        for(studentFile in studentFiles) {
+            // Create a local file in the ./data/ directory for uploading and downloading
+            val filename: String = studentFile.originalFilename
+            val path: Path = Paths.get(localPath);
+            multipartFileToFile(studentFile, path)
+
+            // Get a reference to a blob
+            val blobClient: BlobClient = containerClient.getBlobClient("config/$studentName/$filename")
+
+            // Upload the blob
+            blobClient.uploadFromFile(localPath + filename, true)
+            LOGGER.info("File uploaded in Blob storage as blob: ${blobClient.blobUrl}")
+        }
     }
 
     // download blob
@@ -97,8 +114,8 @@ class AzureBlobStorageService {
         blobClient.downloadToFile(localPath + "config/" + configFileName)
     }
 
-    fun saveStudentsDocuments(containerName: String, studentsDocuments: MultipartFile) {
-        uploadNewDetailsFileToContainer(studentsDocuments, containerName)
+    fun saveStudentDocuments(containerName: String, studentsDocuments: List<MultipartFile>, studentName: String) {
+        uploadStudentFilesToContainer(studentsDocuments, containerName, studentName)
     }
 
     fun getAllContainers(): ArrayList<String> {

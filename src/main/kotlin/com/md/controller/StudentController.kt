@@ -46,22 +46,22 @@ class StudentController (val service: StudentService,
             .orElse(ResponseEntity("Students not found", HttpStatus.NOT_FOUND))
     }
 
-    @GetMapping("/filtered")
-    @ApiOperation(value = "Get all students filtered by faculty and status")
-    @ApiResponses(
-        value = [
-            ApiResponse(code = 200, message = "Get all students filtered by faculty and status"),
-            ApiResponse(code = 400, message = "Bad request"),
-            ApiResponse(code = 500, message = "Internal error, try again later")]
-    )
-    fun getAllStudentsFiltered(@RequestParam faculty_id: UUID,
-                               @RequestParam status: String): ResponseEntity<*> {
-        LOGGER.info("Get all students filtered by faculty and status")
-
-        return service.getStudentsFiltered(faculty_id, status)
-            .map { studentsList -> ResponseEntity<Any>(studentsList, HttpStatus.OK) }
-            .orElse(ResponseEntity("Students not found", HttpStatus.NOT_FOUND))
-    }
+//    @GetMapping("/filtered")
+//    @ApiOperation(value = "Get all students filtered by faculty and status")
+//    @ApiResponses(
+//        value = [
+//            ApiResponse(code = 200, message = "Get all students filtered by faculty and status"),
+//            ApiResponse(code = 400, message = "Bad request"),
+//            ApiResponse(code = 500, message = "Internal error, try again later")]
+//    )
+//    fun getAllStudentsFiltered(@RequestParam faculty_id: UUID,
+//                               @RequestParam status: String): ResponseEntity<*> {
+//        LOGGER.info("Get all students filtered by faculty and status")
+//
+//        return service.getStudentsFiltered(faculty_id, status)
+//            .map { studentsList -> ResponseEntity<Any>(studentsList, HttpStatus.OK) }
+//            .orElse(ResponseEntity("Students not found", HttpStatus.NOT_FOUND))
+//    }
 
     @GetMapping("/{student_id}")
     @ApiOperation(value = "Get student by id")
@@ -78,28 +78,27 @@ class StudentController (val service: StudentService,
             .orElse(ResponseEntity("Students not found", HttpStatus.NOT_FOUND))
     }
 
-//
-//    @PostMapping("/signed_up")
-//    @ApiOperation(value = "Sign up new student")
-//    @ApiResponses(
-//        value = [
-//            ApiResponse(code = 201, message = "student"),
-//            ApiResponse(code = 400, message = "Bad request"),
-//            ApiResponse(code = 500, message = "Internal error, try again later")]
-//    )
-//    fun signUpNewStudent(@Valid @RequestBody studentDto: StudentDto,
-//                         @RequestPart ( "studentDocuments") studentDocuments: MultipartFile):  ResponseEntity<*> {
-//        LOGGER.info("Sign up new student")
-//
-//        // intrebare: cum trimiti datele despre un student? eu am presupus ca se va face cate un call pt fiecare facultate
-//        // si vin niste detalii despre un student si o arhiva cu fisierele lui
-//        return facultyService.getFaculty(faculty_id)
-//            .map { faculty ->
-//                val student = service.addNewStudent(studentDto, faculty, studentDocuments)
-//                ResponseEntity<Any>(student, HttpStatus.OK)
-//            }.orElse(ResponseEntity("Required faculty not found", HttpStatus.NOT_FOUND))
-//
-//    }
+
+    @PostMapping("/{faculty_id}/register")
+    @ApiOperation(value = "Sign up new student")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 201, message = "student"),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun signUpNewStudent(@RequestPart ( "studentDocuments") studentDocuments: List<MultipartFile>,
+                         @PathVariable faculty_id: UUID
+    ):  ResponseEntity<*> {
+        LOGGER.info("Sign up new student")
+
+        return facultyService.getFacultyById(faculty_id)
+            .map { faculty ->
+                val student = service.addNewStudent(studentDocuments, faculty)
+                ResponseEntity<Any>(student, HttpStatus.OK)
+            }.orElse(ResponseEntity("Required faculty not found", HttpStatus.NOT_FOUND))
+
+    }
 
     @PostMapping("/{student_id}/update/{status}")
     @ApiOperation(value = "Manual update for students' status")
@@ -137,7 +136,6 @@ class StudentController (val service: StudentService,
                 emailService.sendEmail(student.email, emailDto)
                 ResponseEntity<Any>("Email sent to the student " + student.email, HttpStatus.OK) }
             .orElse(ResponseEntity("Student not found", HttpStatus.NOT_FOUND))
-
     }
 
 }
