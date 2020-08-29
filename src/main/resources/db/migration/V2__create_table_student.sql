@@ -1,4 +1,4 @@
-CREATE TABLE student
+CREATE TABLE IF NOT EXISTS student
 (
 	id UUID UNIQUE NOT NULL,
 	director VARCHAR(255) NOT NULL,
@@ -10,5 +10,5 @@ CREATE TABLE student
     father_initials VARCHAR(255) NOT NULL,
     citizenship VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
-	PRIMARY KEY (id ASC)
+	PRIMARY KEY (id)
 );

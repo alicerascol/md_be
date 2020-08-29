@@ -13,9 +13,9 @@ data class Student(
     val id: UUID = UUID.randomUUID(),
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "student_faculty",
-        joinColumns = [JoinColumn(name = "student_id", referencedColumnName = "id",  nullable = true)],
-        inverseJoinColumns = [JoinColumn(name = "faculty_id", referencedColumnName = "id")]
+    @JoinTable(name = "stud_fac_table",
+        joinColumns = [JoinColumn(name = "stud_id", referencedColumnName = "id",  nullable = true)],
+        inverseJoinColumns = [JoinColumn(name = "fac_id", referencedColumnName = "id")]
     )
     @JsonBackReference
     val faculties: MutableList<Faculty> = mutableListOf(),

@@ -1,4 +1,4 @@
-CREATE TABLE faculty
+CREATE TABLE IF NOT EXISTS faculty
 (
 	id UUID UNIQUE NOT NULL,
 	name VARCHAR(255) UNIQUE NOT NULL,
@@ -8,5 +8,5 @@ CREATE TABLE faculty
 	JSON_blob_storage_link VARCHAR(255) NULL,
 	config_file_name VARCHAR(255) NULL,
 	container_name VARCHAR(255) NULL,
-	PRIMARY KEY (id ASC)
+	PRIMARY KEY (id)
 );

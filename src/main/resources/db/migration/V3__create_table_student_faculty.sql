@@ -1,10 +1,6 @@
-create table student_faculty
+CREATE TABLE IF NOT EXISTS stud_fac_table
 (
-  student_id UUID,
-  faculty_id UUID,
-  CONSTRAINT student_faculty PRIMARY KEY (student_id, faculty_id),
-  CONSTRAINT FK_student
-      FOREIGN KEY (student_id) REFERENCES student (id),
-  CONSTRAINT FK_faculty
-      FOREIGN KEY (faculty_id) REFERENCES faculty (id)
+  stud_id UUID,
+  fac_id UUID,
+  PRIMARY KEY (stud_id, fac_id)
 );

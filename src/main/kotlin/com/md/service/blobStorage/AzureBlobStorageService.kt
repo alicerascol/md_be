@@ -87,21 +87,25 @@ class AzureBlobStorageService {
     }
 
     fun uploadStudentFilesToContainer(studentFiles: List<MultipartFile>, containerName: String, studentName: String) {
-        val storageClient = createBlobServiceClient()
-        val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
+        try {
+            val storageClient = createBlobServiceClient()
+            val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
 
-        for(studentFile in studentFiles) {
-            // Create a local file in the ./data/ directory for uploading and downloading
-            val filename: String = studentFile.originalFilename
-            val path: Path = Paths.get(localPath);
-            multipartFileToFile(studentFile, path)
+            for (studentFile in studentFiles) {
+                // Create a local file in the ./data/ directory for uploading and downloading
+                val filename: String = studentFile.originalFilename
+                val path: Path = Paths.get(localPath);
+                multipartFileToFile(studentFile, path)
 
-            // Get a reference to a blob
-            val blobClient: BlobClient = containerClient.getBlobClient("config/$studentName/$filename")
+                // Get a reference to a blob
+                val blobClient: BlobClient = containerClient.getBlobClient("config/$studentName/$filename")
 
-            // Upload the blob
-            blobClient.uploadFromFile(localPath + filename, true)
-            LOGGER.info("File uploaded in Blob storage as blob: ${blobClient.blobUrl}")
+                // Upload the blob
+                blobClient.uploadFromFile(localPath + filename, true)
+                LOGGER.info("File uploaded in Blob storage as blob: ${blobClient.blobUrl}")
+            }
+        } catch (ex: Exception) {
+            throw ex
         }
     }
 

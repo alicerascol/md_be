@@ -59,6 +59,7 @@ class StudentController (val service: StudentService,
         return facultyService.getFacultyById(faculty_id)
             .map { faculty ->
                 val studentList = service.getStudentsFiltered(faculty, status)
+                LOGGER.info("students retrieved successfully")
                 ResponseEntity<Any>(studentList, HttpStatus.OK) }
             .orElse(ResponseEntity(HttpStatus.NOT_FOUND))
 
@@ -96,6 +97,7 @@ class StudentController (val service: StudentService,
         return facultyService.getFacultyById(faculty_id)
             .map { faculty ->
                 val student = service.addNewStudent(studentDocuments, faculty)
+                LOGGER.info("student added successfully")
                 ResponseEntity<Any>(student, HttpStatus.OK)
             }.orElse(ResponseEntity("Required faculty not found", HttpStatus.NOT_FOUND))
 
@@ -115,6 +117,7 @@ class StudentController (val service: StudentService,
         return service.getStudent(student_id)
             .map { student ->
                 service.updateStudentObject(student, status)
+                LOGGER.info("student updated successfully")
                 ResponseEntity<Any>(student, HttpStatus.OK)
             }
             .orElse(ResponseEntity("Student not found", HttpStatus.NOT_FOUND))
@@ -135,6 +138,7 @@ class StudentController (val service: StudentService,
         return service.getStudent(student_id)
             .map { student ->
                 emailService.sendEmail(student.email, emailDto)
+                LOGGER.info("email sent successfully")
                 ResponseEntity<Any>("Email sent to the student " + student.email, HttpStatus.OK) }
             .orElse(ResponseEntity("Student not found", HttpStatus.NOT_FOUND))
     }

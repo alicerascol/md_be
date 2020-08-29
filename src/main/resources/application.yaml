@@ -1,11 +1,16 @@
 spring:
 #  profiles.active: local
   datasource:
+    url:  jdbc:postgresql://mddb.postgres.database.azure.com:5432/be
+    username: md@mddb
+    password: Parola123
+#psql postgresql://md%40mddb@mddb.postgres.database.azure.com:5432/be
+
     platform: postgres
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:26257/be?sslmode=disable
-    username: root
-    password:
+#    driverClassName: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:26257/be?sslmode=disable
+#    username: root
+#    password:
     hikari:
       auto-commit: false
       connectionTimeout: 30000
@@ -17,7 +22,8 @@ spring:
       group: true
     jpa:
       open-in-view: false
-      show-sql: false
+#      show-sql: false
+      show-sql: true
       generate-ddl: false
       properties:
         hibernate:
@@ -27,13 +33,14 @@ spring:
           temp:
             use_jdbc_metadata_defaults: false
       hibernate:
-        ddl-auto: validate
+        ddl-auto: update
 
-#logging:
-#  level:
+logging:
+  level:
 #    root: WARN
 #    Exposed: WARN
 #    org.springframework: WARN
+    org.hibernate.SQL: DEBUG
 
 management:
   endpoints:
@@ -50,7 +57,6 @@ management:
     git:
       mode: full
 
-
 #Constants
 azureBlobStorage:
   ACCOUNT_NAME: alicerascol
@@ -62,11 +68,4 @@ emailService:
 
 # DownstreamService
 studentApp:
-  url: http://localhost:9999/updateStatus
-
-
-#  "bodyPatterns": [ {
-#                      "equalToJson": "{ \"student_id\":\"(A-Za-z0-9)*\" , status: \"(A-Z)*\" }",
-#                      "ignoreArrayOrder": true,
-#                      "ignoreExtraElements": true
-#                    } ]
+  url: http://md-wiremock.westeurope.azurecontainer.io:8080/updateStatus
