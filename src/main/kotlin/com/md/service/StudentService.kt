@@ -13,7 +13,8 @@ import org.json.JSONObject;
 @Component
 class StudentService(
     private val studentRepository: StudentRepository,
-    private val azureBlobStorageService: AzureBlobStorageService
+    private val azureBlobStorageService: AzureBlobStorageService,
+    private val downstreamService: DownstreamService
 ) {
 
     companion object {
@@ -42,7 +43,17 @@ class StudentService(
     fun updateStudentObject(student: Student, status: String): Optional<Student> {
         LOGGER.info("updateStudentObject")
         student.status = StudentStatus.valueOf(status)
-        return Optional.of(studentRepository.save(student))
+        val optionalStudent: Optional<Student> =  Optional.of(studentRepository.save(student))
+        try {
+            if(optionalStudent.isPresent) {
+                val newStudent = optionalStudent.get()
+                val statusUpdate = StudentStatusUpdate(status, newStudent.id)
+                downstreamService.notifyStudentApp(statusUpdate)
+            }
+        } catch (ex: Exception) {
+            LOGGER.error(ex.message)
+        }
+        return optionalStudent
     }
 
     fun getStudentDocuments(containerName: String, student: Student):  ArrayList<String>  {
@@ -74,4 +85,5 @@ class StudentService(
 
         return StudentDto(email!!, firstName!!, lastName!!, fatherInitials!!, citizenship!!, phone!!, studentDirector, mutableListOf(faculty))
     }
+
 }

@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import javax.validation.Valid
 
-
+@CrossOrigin(origins = ["*"])
 @RestController
 @RequestMapping("/faculties")
 @Api(tags = ["Faculties"])

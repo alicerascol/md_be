@@ -58,3 +58,15 @@ azureBlobStorage:
 emailService:
   PASSWORD: Email_disertatie123
   EMAIL: email123disertatie@gmail.com
+
+
+# DownstreamService
+studentApp:
+  url: http://localhost:9999/updateStatus
+
+
+#  "bodyPatterns": [ {
+#                      "equalToJson": "{ \"student_id\":\"(A-Za-z0-9)*\" , status: \"(A-Z)*\" }",
+#                      "ignoreArrayOrder": true,
+#                      "ignoreExtraElements": true
+#                    } ]

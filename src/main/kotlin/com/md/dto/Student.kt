@@ -1,11 +1,9 @@
 package com.md.dto
 
 import com.fasterxml.jackson.annotation.JsonBackReference
-import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Email
-import javax.validation.constraints.Pattern
 
 @Entity
 @Table(name = "student")
@@ -66,7 +64,7 @@ fun StudentDto.toStudent(): Student {
     val s = this
     return Student(
         email = s.email,
-        status = StudentStatus.REGISTERED,
+        status = StudentStatus.valueOf("REGISTERED"),
         faculties = s.faculties!!,
         firstName = s.firstName,
         lastName = s.lastName,

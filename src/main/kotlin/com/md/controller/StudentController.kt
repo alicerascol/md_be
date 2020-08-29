@@ -1,9 +1,6 @@
 package com.md.controller
 
 import com.md.dto.EmailDto
-import com.md.dto.FacultyDto
-import com.md.dto.StudentDto
-import com.md.dto.StudentStatus
 import com.md.service.FacultyService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -15,13 +12,12 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import com.md.service.StudentService
 import com.md.service.email.EmailService
-import org.json.JSONObject
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import javax.validation.Valid
 import kotlin.collections.HashMap
 
-
+@CrossOrigin(origins = ["*"])
 @RestController
 @RequestMapping("/students")
 @Api(tags = ["Students"])

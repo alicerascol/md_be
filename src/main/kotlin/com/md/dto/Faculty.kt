@@ -1,10 +1,8 @@
 package com.md.dto
 
-import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.md.service.Utils
 import io.swagger.annotations.ApiModelProperty
-import org.jetbrains.annotations.Nullable
 import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Email
