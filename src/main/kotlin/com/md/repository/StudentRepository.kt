@@ -1,6 +1,6 @@
 package com.md.repository
 
-import com.md.dto.Student
+import com.md.model.Student
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 

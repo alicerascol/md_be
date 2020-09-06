@@ -1,4 +1,4 @@
-package com.md.dto
+package com.md.model
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import java.util.*
@@ -58,7 +58,7 @@ data class StudentDto(
     var faculties: MutableList<Faculty>? = mutableListOf()
 )
 
-enum class StudentStatus { REGISTERED, NEED_WORK, VERIFIED}
+enum class StudentStatus { REGISTERED, NEED_WORK, DOCUMENTS_RESENT , VERIFIED, ADMITTED}
 
 fun StudentDto.toStudent(): Student {
     val s = this

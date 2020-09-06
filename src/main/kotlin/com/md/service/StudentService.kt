@@ -1,20 +1,25 @@
 package com.md.service
 
-import com.md.dto.*
+import com.md.model.*
+import com.md.model.dto.StudentStatusUpdateDto
 import com.md.repository.StudentRepository
 import com.md.service.blobStorage.AzureBlobStorageService
+import com.md.service.excel.GenerateExcelService
 import org.json.JSONArray
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import org.json.JSONObject;
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 @Component
 class StudentService(
     private val studentRepository: StudentRepository,
     private val azureBlobStorageService: AzureBlobStorageService,
-    private val downstreamService: DownstreamService
+    private val downstreamService: DownstreamService,
+    private val generateExcelService: GenerateExcelService
 ) {
 
     companion object {
@@ -47,7 +52,7 @@ class StudentService(
         try {
             if(optionalStudent.isPresent) {
                 val newStudent = optionalStudent.get()
-                val statusUpdate = StudentStatusUpdate(status, newStudent.id)
+                val statusUpdate = StudentStatusUpdateDto(status, newStudent.id)
                 downstreamService.notifyStudentApp(statusUpdate)
             }
         } catch (ex: Exception) {
@@ -56,7 +61,7 @@ class StudentService(
         return optionalStudent
     }
 
-    fun getStudentDocuments(containerName: String, student: Student):  ArrayList<String>  {
+    fun getStudentDocuments(containerName: String, student: Student):  HashMap<String, String>  {
         LOGGER.info("getStudentDocuments")
         return azureBlobStorageService.getStudentDocuments(containerName, student.director)
     }
@@ -86,4 +91,68 @@ class StudentService(
         return StudentDto(email!!, firstName!!, lastName!!, fatherInitials!!, citizenship!!, phone!!, studentDirector, mutableListOf(faculty))
     }
 
+    fun generateDataForExcel(faculty: Faculty): MutableList<HashMap<String, String>> {
+        val students = mutableListOf<HashMap<String, String>>()
+        for (student in faculty.students!!) {
+            var studentData: HashMap<String, String> = HashMap()
+            studentData["id"] = student.id.toString()
+            studentData["email"] = student.email
+            studentData["firstName"] = student.firstName
+            studentData["lastName"] = student.lastName
+            studentData["father_initials"] = student.father_initials
+            studentData["citizenship"] = student.citizenship
+            studentData["phone"] = student.phone
+            val studentDocuments: HashMap<String, String> = azureBlobStorageService.getStudentDocuments(faculty.container_name, student.director)
+            for ((name, link) in studentDocuments) {
+                if (name.contains("Certificatul de nastere")) {
+                    studentData["certificat_nastere"] = link
+                }
+                if (name.contains("cerere de inscriere")) {
+                    studentData["cerere_inscriere"] = link
+                }
+                if (name.contains("Declaratie pe propria raspundere - Depunere documente")) {
+                    studentData["declaratie_depunere_documente"] = link
+                }
+                if (name.contains("Declaratie pe propria raspundere - Loc bugetat")) {
+                    studentData["declaratie_loc_buget"] = link
+                }
+                if (name.contains("Certificatul de casatorie")) {
+                    studentData["certificat_casatorie"] = link
+                }
+                if (name.contains("Dovada de plata a taxei de inscriere")) {
+                    studentData["dovada_plata"] = link
+                }
+                if (name.contains("Carte de identitate")) {
+                    studentData["carte_identitate"] = link
+                }
+                if (name.contains("bacalaureat")) {
+                    studentData["diploma_bacalaureat"] = link
+                }
+                if (name.contains("Adeverinta medicala")) {
+                    studentData["adeverinta_medicala"] = link
+                }
+                if (name.contains("competenta lingvistica")) {
+                    studentData["competenta_lingvistica"] = link
+                }
+                if (name.contains("Veridicitate date")) {
+                    studentData["declaratie_veridicitate"] = link
+                }
+                if (name.contains("fotografie")) {
+                    studentData["fotografie"] = link
+                }
+                if (name.contains("Foaia matricola eliberata de liceu")) {
+                    studentData["foaie_matricola_liceu"] = link
+                }
+                if (name.contains("studentInfo")) {
+                    studentData["studentInfo"] = link
+                }
+            }
+            students.add(studentData)
+        }
+        return students
+    }
+
+    fun generateExcel(faculty: Faculty) {
+        generateExcelService.writeToExcelFile(faculty)
+    }
 }

@@ -1,14 +1,13 @@
 package com.md.service
 
-import com.md.dto.Faculty
-import com.md.dto.FacultyDto
-import com.md.dto.toFaculty
+import com.md.model.Faculty
+import com.md.model.FacultyDto
+import com.md.model.toFaculty
 import com.md.repository.FacultyRepository
 import com.md.service.blobStorage.AzureBlobStorageService
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
-import java.io.File
 import java.util.*
 
 @Component

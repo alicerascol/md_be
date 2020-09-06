@@ -1,4 +1,4 @@
-package com.md.dto
+package com.md.model.dto
 
 data class ErrorDto(val message: String, val errors: List<FieldErrorDto>) {
     constructor(message: String): this(message, emptyList())

@@ -1,6 +1,6 @@
 package com.md.service
 
-import com.md.dto.StudentStatusUpdate
+import com.md.model.dto.StudentStatusUpdateDto
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpEntity
@@ -20,10 +20,10 @@ class DownstreamService(
     @Value("\${studentApp.url}")
     private val URL: String? = null
 
-    fun notifyStudentApp(studentStatusUpdate: StudentStatusUpdate) {
+    fun notifyStudentApp(studentStatusUpdate: StudentStatusUpdateDto) {
         LOGGER.debug("Call notifyStudentApp: {} for: {}", URL, studentStatusUpdate)
         return try {
-            val requestEntity: HttpEntity<StudentStatusUpdate> = HttpEntity(studentStatusUpdate)
+            val requestEntity: HttpEntity<StudentStatusUpdateDto> = HttpEntity(studentStatusUpdate)
             val responseEntity = restTemplate.exchange(URL, HttpMethod.POST, requestEntity, Void::class.java)
         } catch (ex: Exception) {
             LOGGER.error("[{}] Http Client Error: Unable to {}: {}", ex)

@@ -1,7 +1,7 @@
 package com.md.controller
 
-import com.md.dto.ErrorDto
-import com.md.dto.FieldErrorDto
+import com.md.model.dto.ErrorDto
+import com.md.model.dto.FieldErrorDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.HttpRequestMethodNotSupportedException

@@ -1,7 +1,7 @@
 package com.md.controller
 
-import com.md.dto.FacultyDto
-import com.md.dto.UserDto
+import com.md.model.FacultyDto
+import com.md.model.dto.UserDto
 import com.md.service.FacultyService
 import com.md.service.Utils
 import io.swagger.annotations.Api
@@ -96,7 +96,7 @@ class FacultyController(val service: FacultyService) {
             }.orElse(ResponseEntity(HttpStatus.NOT_FOUND))
     }
 
-    @GetMapping("/{faculty_id}/download/details")
+    @GetMapping("/{faculty_id}/details/download")
     @ApiOperation(value = "Download JSON details for faculty by faculty id")
     @ApiResponses(
         value = [
@@ -131,21 +131,6 @@ class FacultyController(val service: FacultyService) {
                 ResponseEntity(facultyDetails, HttpStatus.OK) }
             .orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
     }
-
-//    @GetMapping("/details")
-//    @ApiOperation(value = "Get all faculties details")
-//    @ApiResponses(
-//        value = [
-//            ApiResponse(code = 200, message = "Get all faculties details"),
-//            ApiResponse(code = 400, message = "Bad request"),
-//            ApiResponse(code = 500, message = "Internal error, try again later")]
-//    )
-//    fun getAllFacultiesDetails(): ResponseEntity<Any> {
-//        LOGGER.info("Get all faculties details")
-//        return service.getFacultyDetails()
-//            .map { ResponseEntity<Any>( link, HttpStatus.OK)}
-//           .orElse(ResponseEntity("Something went wrong", HttpStatus.BAD_REQUEST))
-//    }
 
     @PostMapping("/login")
     @ApiOperation(value = "Login faculty")

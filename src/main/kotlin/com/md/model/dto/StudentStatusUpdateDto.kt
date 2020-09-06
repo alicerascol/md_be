@@ -1,8 +1,8 @@
-package com.md.dto
+package com.md.model.dto
 
 import java.util.*
 
-data class StudentStatusUpdate (
+data class StudentStatusUpdateDto (
     val status: String,
     val student_id: UUID
 )

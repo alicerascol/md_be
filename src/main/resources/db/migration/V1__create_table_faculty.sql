@@ -8,5 +8,6 @@ CREATE TABLE IF NOT EXISTS faculty
 	JSON_blob_storage_link VARCHAR(255) NULL,
 	config_file_name VARCHAR(255) NULL,
 	container_name VARCHAR(255) NULL,
+	landing_page_link VARCHAR(255) NULL,
 	PRIMARY KEY (id)
 );

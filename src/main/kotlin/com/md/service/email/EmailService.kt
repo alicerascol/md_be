@@ -1,6 +1,6 @@
 package com.md.service.email
 
-import com.md.dto.EmailDto
+import com.md.model.dto.EmailDto
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -23,6 +23,9 @@ class EmailService {
     @Value("\${emailService.PASSWORD}")
     private val PASSWORD: String? = null
 
+    @Value("\${hardcodedStudentEmail.EMAIL}")
+    private val HARDCODED_EMAIL: String? = null
+
     fun sendEmail(studentEmail: String, emailDto: EmailDto) {
         try {
             val host = "smtp.gmail.com"
@@ -32,10 +35,10 @@ class EmailService {
             val properties = Properties()
 
             with(properties) {
-                put("mail.smtp.starttls.enable", "false");
-                put("mail.smtp.host", host);
-                put("mail.smtp.user", from);
-                put("mail.smtp.password", password);
+                put("mail.smtp.starttls.enable", "false")
+                put("mail.smtp.host", host)
+                put("mail.smtp.user", from)
+                put("mail.smtp.password", password)
                 put("mail.smtp.port", "587")
                 put("mail.smtp.auth", "true")
             }
@@ -44,7 +47,7 @@ class EmailService {
             val message = MimeMessage(session)
             message.setFrom(InternetAddress(from))
 
-            message.setRecipients(Message.RecipientType.TO, studentEmail)
+            message.setRecipients(Message.RecipientType.TO, HARDCODED_EMAIL)
             message.subject = emailDto.subject
             message.setText(emailDto.message)
 

@@ -1,5 +1,5 @@
 spring:
-#  profiles.active: local
+  profiles.active: local
   datasource:
     url:  jdbc:postgresql://mddb.postgres.database.azure.com:5432/be
     username: md@mddb
@@ -65,6 +65,9 @@ emailService:
   PASSWORD: Email_disertatie123
   EMAIL: email123disertatie@gmail.com
 
+hardcodedStudentEmail:
+  PASSWORD: StudentTestDisertatie123
+  EMAIL: student.test.disertatie@gmail.com
 
 # DownstreamService
 studentApp:

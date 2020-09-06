@@ -1,6 +1,6 @@
 package com.md.controller
 
-import com.md.dto.EmailDto
+import com.md.model.dto.EmailDto
 import com.md.service.FacultyService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*
 import com.md.service.StudentService
 import com.md.service.email.EmailService
 import org.springframework.web.multipart.MultipartFile
+import java.io.File
 import java.util.*
 import javax.validation.Valid
 import kotlin.collections.HashMap
@@ -23,7 +24,7 @@ import kotlin.collections.HashMap
 @Api(tags = ["Students"])
 class StudentController (val service: StudentService,
                          val facultyService: FacultyService,
-                         val emailService: EmailService){
+                         val emailService: EmailService) {
 
     companion object {
         private val LOGGER = LoggerFactory.getLogger(StudentController::class.java)
@@ -98,7 +99,7 @@ class StudentController (val service: StudentService,
             .map { faculty ->
                 val student = service.addNewStudent(studentDocuments, faculty)
                 LOGGER.info("student added successfully")
-                ResponseEntity<Any>(student, HttpStatus.OK)
+                ResponseEntity<Any>(student, HttpStatus.CREATED)
             }.orElse(ResponseEntity("Required faculty not found", HttpStatus.NOT_FOUND))
 
     }
@@ -133,7 +134,8 @@ class StudentController (val service: StudentService,
             ApiResponse(code = 500, message = "Internal error, try again later")]
     )
     fun sendEmailToTheStudent(@PathVariable student_id: UUID,
-                                @Valid @RequestBody emailDto: EmailDto):  ResponseEntity<*>  {
+                                @Valid @RequestBody emailDto: EmailDto
+    ):  ResponseEntity<*>  {
         LOGGER.info("Send status email for student")
         return service.getStudent(student_id)
             .map { student ->
@@ -157,13 +159,48 @@ class StudentController (val service: StudentService,
             .map {faculty ->
                 service.getStudent(student_id)
                     .map { student ->
-                        val blobUrls = service.getStudentDocuments(faculty.container_name, student)
-                        val response = HashMap<String, String>()
-                        response["email"] = student.email
-                        response["documents"] = blobUrls.toString()
+                        val blobDetails = service.getStudentDocuments(faculty.container_name, student)
+                        val response = HashMap<String, HashMap<String, String>>()
+                        val dummyValue = HashMap<String, String>()
+                        dummyValue["email"] = student.email
+                        response["email"] = dummyValue
+                        response["documents"] = blobDetails
                         ResponseEntity<Any>(response, HttpStatus.OK)
                     }
                     .orElse(ResponseEntity("Student not found", HttpStatus.NOT_FOUND))
+            }.orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
+    }
+
+    @GetMapping("/{faculty_id}/export")
+    @ApiOperation(value = "Export excel with students' details")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 201, message = "student"),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun exportExcelWithStudentsDetails(@PathVariable faculty_id: UUID):  ResponseEntity<*>  {
+        LOGGER.info("Export excel with students' details")
+        return facultyService.getFacultyById(faculty_id)
+            .map {faculty -> service.generateExcel(faculty)
+                ResponseEntity<Any>(HttpStatus.OK)
+            }.orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
+    }
+
+    @GetMapping("/{faculty_id}/export/data")
+    @ApiOperation(value = "Export excel with students' details")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 201, message = "student"),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun exportDataStudentsForExcel(@PathVariable faculty_id: UUID):  ResponseEntity<*>  {
+        LOGGER.info("Export excel with students' details")
+        return facultyService.getFacultyById(faculty_id)
+            .map {faculty ->
+                val studentsData = service.generateDataForExcel(faculty)
+                ResponseEntity<Any>(studentsData, HttpStatus.OK)
             }.orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
     }
 

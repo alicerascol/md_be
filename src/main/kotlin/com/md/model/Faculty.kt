@@ -1,4 +1,4 @@
-package com.md.dto
+package com.md.model
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.md.service.Utils
@@ -40,7 +40,9 @@ data class Faculty(
 
     var config_file_name: String,
 
-    val container_name: String
+    val container_name: String,
+
+    var landing_page_link: String
 ) {
     override fun toString(): String {
         return "faculty(id=$id, " +
@@ -85,6 +87,7 @@ fun FacultyDto.toFaculty(): Faculty {
         university = f.university,
         JSON_blob_storage_link =  "",
         config_file_name = "",
+        landing_page_link = "",
         students = f.students?.map { studentDto: StudentDto -> studentDto.toStudent() },
         container_name =  f.name.replace(" ","").toLowerCase()
     )

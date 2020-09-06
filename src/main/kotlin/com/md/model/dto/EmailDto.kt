@@ -1,4 +1,4 @@
-package com.md.dto
+package com.md.model.dto
 
 import io.swagger.annotations.ApiModelProperty
 import javax.validation.constraints.NotEmpty

@@ -6,10 +6,12 @@ import com.azure.storage.blob.BlobContainerClient
 import com.azure.storage.blob.BlobServiceClient
 import com.azure.storage.blob.BlobServiceClientBuilder
 import com.azure.storage.blob.models.BlobContainerItem
+import com.azure.storage.blob.models.PublicAccessType
 import com.azure.storage.common.StorageSharedKeyCredential
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import com.azure.core.util.Context
 import org.springframework.web.multipart.MultipartFile
 import java.io.IOException
 import java.nio.file.Path
@@ -60,7 +62,7 @@ class AzureBlobStorageService {
          * Create a container in Storage blob account.
          */
         try {
-            blobContainerClient.create()
+            blobContainerClient.createWithResponse(null, PublicAccessType.CONTAINER, null, Context.NONE)
         } catch (ex: Exception) {
             LOGGER.error(ex.message)
             if(!ex.message?.contains("already exists")!!)  throw ex
@@ -98,7 +100,7 @@ class AzureBlobStorageService {
                 multipartFileToFile(studentFile, path)
 
                 // Get a reference to a blob
-                val blobClient: BlobClient = containerClient.getBlobClient("config/$studentName/$filename")
+                val blobClient: BlobClient = containerClient.getBlobClient("$studentName/$filename")
 
                 // Upload the blob
                 blobClient.uploadFromFile(localPath + filename, true)
@@ -122,15 +124,15 @@ class AzureBlobStorageService {
         uploadStudentFilesToContainer(studentsDocuments, containerName, studentName)
     }
 
-    fun getStudentDocuments(containerName: String, studentDirector: String):  ArrayList<String> {
+    fun getStudentDocuments(containerName: String, studentDirector: String):  HashMap<String, String> {
         val storageClient = createBlobServiceClient()
         val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
         val blobNames: List<String> = getContainerBlobs(containerName)
-        val blobUrls = ArrayList<String>();
+        val blobUrls = HashMap<String, String>()
         for(blobName in blobNames) {
-            if(blobName.contains(studentDirector.take(studentDirector.length-2))) {
+            if(blobName.contains(studentDirector.take(studentDirector.length - 2))) {
                 val blobClient: BlobClient = containerClient.getBlobClient(blobName)
-                blobUrls.add(blobClient.blobUrl)
+                blobUrls.put(blobClient.blobName, blobClient.blobUrl)
             }
         }
         return blobUrls
