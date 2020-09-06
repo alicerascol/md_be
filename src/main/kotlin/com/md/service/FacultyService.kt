@@ -6,6 +6,7 @@ import com.md.model.toFaculty
 import com.md.repository.FacultyRepository
 import com.md.service.blobStorage.AzureBlobStorageService
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
@@ -20,8 +21,8 @@ class FacultyService(
         private val LOGGER = LoggerFactory.getLogger(FacultyService::class.java)
     }
 
-    private val localPath = "/Users/arascol/Documents/alice/disertatie/be/data/"
-
+    @Value("\${localPath}")
+    private val localPath: String? = null
 
     fun addNewFaculty(facultyDto: FacultyDto):  Optional<Faculty> {
         LOGGER.info("Add new faculy")
@@ -57,7 +58,7 @@ class FacultyService(
     }
 
     fun readFileDirectlyAsText(configFileName: String): String {
-        return Utils.readFileDirectlyAsText(configFileName, localPath)
+        return Utils.readFileDirectlyAsText(configFileName, localPath!!)
     }
 
 }

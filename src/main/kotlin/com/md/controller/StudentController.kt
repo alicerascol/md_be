@@ -1,5 +1,6 @@
 package com.md.controller
 
+import com.md.model.Student
 import com.md.model.dto.EmailDto
 import com.md.service.FacultyService
 import io.swagger.annotations.Api
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*
 import com.md.service.StudentService
 import com.md.service.email.EmailService
 import org.springframework.web.multipart.MultipartFile
-import java.io.File
 import java.util.*
 import javax.validation.Valid
 import kotlin.collections.HashMap
@@ -104,6 +104,29 @@ class StudentController (val service: StudentService,
 
     }
 
+    @PostMapping("/{faculty_id}/{student_id}/update_documents")
+    @ApiOperation(value = "Update documents of existing student")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 201, message = "student"),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun updateDocumentsForExistingStudent(@RequestPart ( "studentDocuments") studentDocuments: List<MultipartFile>,
+                         @PathVariable faculty_id: UUID,  @PathVariable student_id: UUID
+    ):  ResponseEntity<*> {
+        LOGGER.info("Update documents of existing student")
+
+        return facultyService.getFacultyById(faculty_id)
+            .map { faculty ->
+                val student: List<Student> = faculty.students!!.filter { student -> student.id == student_id  }
+                service.updateDocumentsForExistingStudent(studentDocuments, faculty, student[0])
+                LOGGER.info("student added successfully")
+                ResponseEntity<Any>(student, HttpStatus.CREATED)
+            }.orElse(ResponseEntity("Required faculty not found", HttpStatus.NOT_FOUND))
+
+    }
+
     @PostMapping("/{student_id}/update/{status}")
     @ApiOperation(value = "Manual update for students' status")
     @ApiResponses(
@@ -122,7 +145,6 @@ class StudentController (val service: StudentService,
                 ResponseEntity<Any>(student, HttpStatus.OK)
             }
             .orElse(ResponseEntity("Student not found", HttpStatus.NOT_FOUND))
-
     }
 
     @PostMapping("/{student_id}/email")

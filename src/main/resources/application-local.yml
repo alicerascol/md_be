@@ -27,3 +27,5 @@ spring:
             use_jdbc_metadata_defaults: false
       hibernate:
         ddl-auto: validate
+
+localPath: "/Users/arascol/Documents/alice/disertatie/be/data/"

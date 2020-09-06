@@ -72,3 +72,6 @@ hardcodedStudentEmail:
 # DownstreamService
 studentApp:
   url: http://md-wiremock.westeurope.azurecontainer.io:8080/updateStatus
+
+# temporary path to save documents
+localPath: ""

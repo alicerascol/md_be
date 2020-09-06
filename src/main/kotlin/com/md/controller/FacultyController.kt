@@ -56,6 +56,21 @@ class FacultyController(val service: FacultyService) {
             .orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
     }
 
+    @GetMapping("/{faculty_id}/landing_page")
+    @ApiOperation(value = "Get faculty by faculty_id")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 200, message = "Get faculty by faculty_id"),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun getFacultyLandingPage(@PathVariable faculty_id: UUID): ResponseEntity<Any> {
+        LOGGER.info("Get faculty by faculty_id")
+        return service.getFacultyById(faculty_id)
+            .map { faculty -> ResponseEntity<Any>(faculty.landing_page_link, HttpStatus.OK) }
+            .orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
+    }
+
     @GetMapping
     @ApiOperation(value = "Get all faculties")
     @ApiResponses(

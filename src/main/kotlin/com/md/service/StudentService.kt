@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import org.json.JSONObject;
-import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 @Component
@@ -25,7 +24,6 @@ class StudentService(
     companion object {
         private val LOGGER = LoggerFactory.getLogger(StudentService::class.java)
     }
-    private val localPath = "/Users/arascol/Documents/alice/disertatie/be/data/"
 
     fun addNewStudent(studentDocuments: List<MultipartFile>, faculty: Faculty): Student? {
         LOGGER.info("addNewStudent")
@@ -39,6 +37,13 @@ class StudentService(
 
         azureBlobStorageService.saveStudentDocuments(faculty.container_name, studentDocuments, studentDto!!.director)
         return studentRepository.save(studentDto?.toStudent())
+    }
+
+    fun updateDocumentsForExistingStudent(studentDocuments: List<MultipartFile>, faculty: Faculty, student: Student): Student? {
+        LOGGER.info("updateDocumentsForExistingStudent")
+        student.status = StudentStatus.DOCUMENTS_RESENT
+        azureBlobStorageService.saveStudentDocuments(faculty.container_name, studentDocuments, student.director)
+        return studentRepository.save(student)
     }
 
     fun getStudents(): Optional<List<Student>> = Optional.of(studentRepository.findAll())
