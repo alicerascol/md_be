@@ -159,14 +159,14 @@ class AzureBlobStorageService {
             val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
             val blobClient: BlobClient = containerClient.getBlobClient("config/$configFileName")
 
-            val dir = File(localPath + "config/")
+            val dir = File(localPath)
             if (dir.isDirectory) {
                 val children: Array<String> = dir.list()
                 for (i in children.indices) {
                     File(dir, children[i]).delete()
                 }
             }
-            blobClient.downloadToFile(localPath + "config/" + configFileName)
+            blobClient.downloadToFile(localPath + configFileName)
         } catch (ex: Exception) {
             throw ex
         }
