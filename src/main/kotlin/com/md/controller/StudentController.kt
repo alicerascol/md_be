@@ -204,8 +204,9 @@ class StudentController (val service: StudentService,
     fun exportExcelWithStudentsDetails(@PathVariable faculty_id: UUID):  ResponseEntity<*>  {
         LOGGER.info("Export excel with students' details")
         return facultyService.getFacultyById(faculty_id)
-            .map {faculty -> service.generateExcel(faculty)
-                ResponseEntity<Any>(HttpStatus.OK)
+            .map {faculty ->
+                val link = service.generateExcel(faculty)
+                ResponseEntity<Any>(link, HttpStatus.OK)
             }.orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
     }
 

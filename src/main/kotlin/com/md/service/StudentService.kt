@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value
+import java.io.File
 import kotlin.collections.HashMap
 
 @Component
@@ -24,6 +26,9 @@ class StudentService(
     companion object {
         private val LOGGER = LoggerFactory.getLogger(StudentService::class.java)
     }
+
+    @Value("\${localPath}")
+    private val localPath: String? = null
 
     fun addNewStudent(studentDocuments: List<MultipartFile>, faculty: Faculty): Student? {
         LOGGER.info("addNewStudent")
@@ -157,7 +162,15 @@ class StudentService(
         return students
     }
 
-    fun generateExcel(faculty: Faculty) {
+    fun generateExcel(faculty: Faculty): String {
         generateExcelService.writeToExcelFile(faculty)
+        val link: String = azureBlobStorageService.uploadStudentsExcel(faculty.container_name)
+
+        val dir = File(localPath)
+        if (dir.isDirectory) {
+           File(dir, "students.xlsx").delete()
+        }
+
+        return link
     }
 }

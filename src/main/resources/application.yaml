@@ -1,5 +1,5 @@
 spring:
-  profiles.active: local
+#  profiles.active: local
   datasource:
     url:  jdbc:postgresql://mddb.postgres.database.azure.com:5432/be
     username: md@mddb
@@ -74,4 +74,4 @@ studentApp:
   url: http://md-wiremock.westeurope.azurecontainer.io:8080/updateStatus
 
 # temporary path to save documents
-localPath: ""
+localPath: "/home/"

@@ -1,6 +1,7 @@
 package com.md.controller
 
 import com.md.model.FacultyDto
+import com.md.model.dto.KeyValueUpdateObjectDto
 import com.md.model.dto.UserDto
 import com.md.service.FacultyService
 import com.md.service.Utils
@@ -143,6 +144,25 @@ class FacultyController(val service: FacultyService) {
         return service.getFacultyById(faculty_id)
             .map { faculty ->
                 val facultyDetails = service.readFileDirectlyAsText(faculty.config_file_name)
+                ResponseEntity(facultyDetails, HttpStatus.OK) }
+            .orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
+    }
+
+    @PostMapping("/{faculty_id}/update_details")
+    @ApiOperation(value = "Update details about the faculty")
+    @ApiResponses(
+        value = [
+            ApiResponse(code = 200, message = "Get JSON details for faculty by faculty id"),
+            ApiResponse(code = 400, message = "Bad request"),
+            ApiResponse(code = 500, message = "Internal error, try again later")]
+    )
+    fun updateDetailsInFile(@PathVariable faculty_id: UUID,
+                            @Valid @RequestBody keyValueUpdateObjectDto: KeyValueUpdateObjectDto): ResponseEntity<*> {
+        LOGGER.info("Get JSON details for faculty by faculty id")
+
+        return service.getFacultyById(faculty_id)
+            .map { faculty ->
+                val facultyDetails = service.updateConfigFileForFaculty(keyValueUpdateObjectDto, faculty)
                 ResponseEntity(facultyDetails, HttpStatus.OK) }
             .orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
     }

@@ -18,6 +18,12 @@ object Utils {
 
     fun readFileDirectlyAsText(configFileName: String, localPath: String): String {
         LOGGER.info("readFileDirectlyAsText")
-        return File(localPath + "config/" +configFileName).readText(Charsets.UTF_8)
+        val dir = File(localPath)
+        if (dir.isDirectory) {
+            var file = File(configFileName)
+            if(file.exists())
+                File(dir, configFileName).delete()
+        }
+        return File(localPath + configFileName).readText(Charsets.UTF_8)
     }
 }

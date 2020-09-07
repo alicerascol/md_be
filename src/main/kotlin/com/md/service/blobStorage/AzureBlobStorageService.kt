@@ -92,6 +92,26 @@ class AzureBlobStorageService {
         }
     }
 
+    fun uploadNewDetailsFileToContainer(file: File, containerName: String): String {
+        try {
+            val storageClient = createBlobServiceClient()
+            val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
+
+            val filename: String = file.name
+
+            // Get a reference to a blob
+            val blobClient: BlobClient = containerClient.getBlobClient("config/$filename")
+
+            // Upload the blob
+            blobClient.uploadFromFile(localPath + filename, true)
+            LOGGER.info("File uploaded in Blob storage as blob: ${blobClient.blobUrl}")
+
+            return blobClient.blobUrl
+        } catch (ex: Exception) {
+            throw ex
+        }
+    }
+
     fun uploadStudentFilesToContainer(studentFiles: List<MultipartFile>, containerName: String, studentName: String) {
         try {
             val storageClient = createBlobServiceClient()
@@ -139,6 +159,13 @@ class AzureBlobStorageService {
             val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
             val blobClient: BlobClient = containerClient.getBlobClient("config/$configFileName")
 
+            val dir = File(localPath + "config/")
+            if (dir.isDirectory) {
+                val children: Array<String> = dir.list()
+                for (i in children.indices) {
+                    File(dir, children[i]).delete()
+                }
+            }
             blobClient.downloadToFile(localPath + "config/" + configFileName)
         } catch (ex: Exception) {
             throw ex
@@ -177,6 +204,17 @@ class AzureBlobStorageService {
             blobNames.add(blobItem.name)
         }
         return blobNames
+    }
+
+    fun uploadStudentsExcel(containerName: String): String {
+        val storageClient = createBlobServiceClient()
+        val containerClient: BlobContainerClient = storageClient.getBlobContainerClient(containerName)
+        val blobClient: BlobClient = containerClient.getBlobClient("students.xlsx")
+
+        // Upload the blob
+        blobClient.uploadFromFile(localPath + "students.xlsx", true)
+        LOGGER.info("File uploaded in Blob storage as blob: ${blobClient.blobUrl}")
+        return blobClient.blobUrl
     }
 
     @Throws(IOException::class)

@@ -4,6 +4,7 @@ import com.md.model.Faculty
 import com.md.service.blobStorage.AzureBlobStorageService
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import org.springframework.beans.factory.annotation.Value
 import java.io.FileOutputStream
 import org.springframework.stereotype.Component
 
@@ -12,7 +13,8 @@ class GenerateExcelService(
     private val azureBlobStorageService: AzureBlobStorageService
 ) {
 
-    private val filepath = "/Users/arascol/Documents/alice/disertatie/be/data/excel.xlsx"
+    @Value("\${localPath}")
+    private val localPath: String? = null
 
     fun writeToExcelFile(faculty: Faculty) {
         //Instantiate Excel workbook:
@@ -42,7 +44,7 @@ class GenerateExcelService(
         }
 
         //Write file:
-        val outputStream = FileOutputStream(filepath)
+        val outputStream = FileOutputStream(localPath + "students.xlsx")
         xlWb.write(outputStream)
     }
 
