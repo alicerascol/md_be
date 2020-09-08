@@ -34,7 +34,6 @@ class GenerateExcelService(
             xlWs.getRow(rowNumber).createCell(columnNumber++).setCellValue(student.father_initials)
             xlWs.getRow(rowNumber).createCell(columnNumber++).setCellValue(student.citizenship)
             xlWs.getRow(rowNumber).createCell(columnNumber++).setCellValue(student.phone)
-            xlWs.getRow(rowNumber).createCell(columnNumber++).setCellValue(student.status.toString())
 
             val studentDocuments: HashMap<String, String> = azureBlobStorageService.getStudentDocuments(faculty.container_name, student.director)
             for ((name, link) in studentDocuments) {
@@ -58,7 +57,6 @@ class GenerateExcelService(
         xlWs.getRow(rowNumber).createCell(columnNumber++).setCellValue("Father initials")
         xlWs.getRow(rowNumber).createCell(columnNumber++).setCellValue("Citizenship")
         xlWs.getRow(rowNumber).createCell(columnNumber++).setCellValue("Phone")
-        xlWs.getRow(rowNumber).createCell(columnNumber++).setCellValue("Status")
 
         // documents
         xlWs.getRow(rowNumber).createCell(columnNumber++).setCellValue("Student Info")

@@ -6,5 +6,5 @@ import java.util.*
 
 
 interface StudentRepository : JpaRepository<Student, UUID> {
-//    fun findByFacultyIdsAndStatus(facultyId: UUID, status: String): List<Student>
+    fun findByEmail(email: String): Optional<Student>
 }

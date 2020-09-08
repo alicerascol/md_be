@@ -127,7 +127,7 @@ class StudentController (val service: StudentService,
 
     }
 
-    @PostMapping("/{student_id}/update/{status}")
+    @PostMapping("/{faculty_id}/{student_id}/update/{status}")
     @ApiOperation(value = "Manual update for students' status")
     @ApiResponses(
         value = [
@@ -136,15 +136,20 @@ class StudentController (val service: StudentService,
             ApiResponse(code = 500, message = "Internal error, try again later")]
     )
     fun manualUpdateStudentStatus(@PathVariable student_id: UUID,
-                                  @PathVariable status: String):  ResponseEntity<*> {
+                                  @PathVariable faculty_id: UUID,
+                                  @PathVariable status: String
+    ):  ResponseEntity<*> {
         LOGGER.info("entered manual update for students' status")
-        return service.getStudent(student_id)
-            .map { student ->
-                service.updateStudentObject(student, status)
-                LOGGER.info("student updated successfully")
-                ResponseEntity<Any>(student, HttpStatus.OK)
-            }
+        return facultyService.getFacultyById(faculty_id).map { faculty ->
+                    service.getStudent(student_id)
+                            .map { student ->
+                                service.updateStudentObject(faculty, student, status)
+                                LOGGER.info("student updated successfully")
+                                ResponseEntity<Any>(student, HttpStatus.OK)
+                            }
             .orElse(ResponseEntity("Student not found", HttpStatus.NOT_FOUND))
+        }.orElse(ResponseEntity("Faculty not found", HttpStatus.NOT_FOUND))
+
     }
 
     @PostMapping("/{student_id}/email")

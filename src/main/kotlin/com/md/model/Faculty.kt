@@ -34,7 +34,7 @@ data class Faculty(
 
     @ManyToMany(mappedBy = "faculties", cascade = [CascadeType.DETACH])
     @JsonManagedReference
-    var students: List<Student>? = mutableListOf(),
+    var students: MutableList<Student>? = mutableListOf(),
 
     var JSON_blob_storage_link: String,
 
@@ -74,7 +74,7 @@ data class FacultyDto(
     @field: NotEmpty
     val university: String,
 
-    val students: List<StudentDto>? = mutableListOf()
+    val students: MutableList<StudentDto>? = mutableListOf()
 )
 
 
@@ -88,7 +88,7 @@ fun FacultyDto.toFaculty(): Faculty {
         JSON_blob_storage_link =  "",
         config_file_name = "",
         landing_page_link = "",
-        students = f.students?.map { studentDto: StudentDto -> studentDto.toStudent() },
+        students = f.students?.map { studentDto: StudentDto -> studentDto.toStudent() } as MutableList<Student>?,
         container_name =  f.name.replace(" ","").toLowerCase()
     )
 }

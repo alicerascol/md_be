@@ -2,6 +2,8 @@ package com.md.service
 
 import com.md.model.*
 import com.md.model.dto.StudentStatusUpdateDto
+import com.md.repository.FacultyRepository
+import com.md.repository.StudFacRepository
 import com.md.repository.StudentRepository
 import com.md.service.blobStorage.AzureBlobStorageService
 import com.md.service.excel.GenerateExcelService
@@ -13,11 +15,14 @@ import java.util.*
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value
 import java.io.File
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 @Component
 class StudentService(
     private val studentRepository: StudentRepository,
+    private val facultyRepository: FacultyRepository,
+    private val studFacRepository: StudFacRepository,
     private val azureBlobStorageService: AzureBlobStorageService,
     private val downstreamService: DownstreamService,
     private val generateExcelService: GenerateExcelService
@@ -30,7 +35,7 @@ class StudentService(
     @Value("\${localPath}")
     private val localPath: String? = null
 
-    fun addNewStudent(studentDocuments: List<MultipartFile>, faculty: Faculty): Student? {
+    fun addNewStudent(studentDocuments: List<MultipartFile>, faculty: Faculty): StudentWithStatus {
         LOGGER.info("addNewStudent")
         var studentDto: StudentDto? = null
         studentDocuments.map {
@@ -41,34 +46,69 @@ class StudentService(
         }
 
         azureBlobStorageService.saveStudentDocuments(faculty.container_name, studentDocuments, studentDto!!.director)
-        return studentRepository.save(studentDto?.toStudent())
+        val optionalStudent: Optional<Student> = studentRepository.findByEmail(studentDto!!.email)
+        if(optionalStudent.isPresent) {
+            val student: Student = optionalStudent.get()
+            faculty.students!!.add(student)
+            facultyRepository.save(faculty)
+
+            val studFacOptional = studFacRepository.findByStudidAndFacid(student.id, faculty.id)
+            if (!studFacOptional.isPresent) {
+                val studFac = StudFac(student.id, faculty.id, StudentStatus.REGISTERED)
+                studFacRepository.save(studFac)
+            } else {
+                val studFac = studFacOptional.get()
+                studFac.status = StudentStatus.REGISTERED
+                studFacRepository.save(studFac)
+            }
+
+            val studentWithStatus = StudentWithStatus(student.id, student.email, student.firstName, student.lastName,
+                student.father_initials, student.citizenship, student.phone, student.director, StudentStatus.REGISTERED)
+            return studentWithStatus
+        }
+
+        val student = studentRepository.save(studentDto?.toStudent())
+        val studFacOptional = studFacRepository.findByStudidAndFacid(student!!.id, faculty.id)
+        val studFac = studFacOptional.get()
+        studFac.status = StudentStatus.REGISTERED
+        studFacRepository.save(studFac)
+        return StudentWithStatus(
+                student!!.id, student.email, student.firstName, student.lastName,
+                student.father_initials, student.citizenship, student.phone, student.director, StudentStatus.REGISTERED)
     }
 
-    fun updateDocumentsForExistingStudent(studentDocuments: List<MultipartFile>, faculty: Faculty, student: Student): Student? {
+    fun updateDocumentsForExistingStudent(studentDocuments: List<MultipartFile>, faculty: Faculty, student: Student): StudentWithStatus {
         LOGGER.info("updateDocumentsForExistingStudent")
-        student.status = StudentStatus.DOCUMENTS_RESENT
-        azureBlobStorageService.saveStudentDocuments(faculty.container_name, studentDocuments, student.director)
-        return studentRepository.save(student)
+        val optionalStudFac: Optional<StudFac> = studFacRepository.findByStudidAndFacid(student.id, faculty.id)
+
+        if(optionalStudFac.isPresent) {
+            val studFac = optionalStudFac.get()
+            studFac.status = StudentStatus.DOCUMENTS_RESENT
+            azureBlobStorageService.saveStudentDocuments(faculty.container_name, studentDocuments, student.director)
+            return StudentWithStatus(student.id, student.email, student.firstName, student.lastName,
+            student.father_initials, student.citizenship, student.phone, student.director, studFac.status)
+        } else throw Exception("Intrarea nu a fost gasita in baza de date")
     }
 
     fun getStudents(): Optional<List<Student>> = Optional.of(studentRepository.findAll())
 
     fun getStudent(studentId: UUID): Optional<Student> = studentRepository.findById(studentId)
 
-    fun updateStudentObject(student: Student, status: String): Optional<Student> {
+    fun updateStudentObject(faculty: Faculty, student: Student, status: String): StudentWithStatus {
         LOGGER.info("updateStudentObject")
-        student.status = StudentStatus.valueOf(status)
-        val optionalStudent: Optional<Student> =  Optional.of(studentRepository.save(student))
-        try {
-            if(optionalStudent.isPresent) {
-                val newStudent = optionalStudent.get()
-                val statusUpdate = StudentStatusUpdateDto(status, newStudent.id)
-                downstreamService.notifyStudentApp(statusUpdate)
-            }
-        } catch (ex: Exception) {
-            LOGGER.error(ex.message)
-        }
-        return optionalStudent
+        val optionalStudFac: Optional<StudFac> = studFacRepository.findByStudidAndFacid(student.id, faculty.id)
+
+        if(optionalStudFac.isPresent) {
+            val studFac = optionalStudFac.get()
+            studFac.status = StudentStatus.valueOf(status)
+            studFacRepository.save(studFac)
+
+            val statusUpdate = StudentStatusUpdateDto(status, student.id, faculty.id)
+            downstreamService.notifyStudentApp(statusUpdate)
+
+            return StudentWithStatus(student.id, student.email, student.firstName, student.lastName,
+                student.father_initials, student.citizenship, student.phone, student.director, studFac.status)
+        } else throw Exception("Intrarea nu a fost gasita in baza de date")
     }
 
     fun getStudentDocuments(containerName: String, student: Student):  HashMap<String, String>  {
@@ -76,13 +116,37 @@ class StudentService(
         return azureBlobStorageService.getStudentDocuments(containerName, student.director)
     }
 
-    fun getStudentsFiltered(faculty: Faculty, studentStatus: String): List<Student>? {
-        if(studentStatus == "all")
-            return faculty.students
+    fun getStudentsFiltered(faculty: Faculty, studentStatus: String): MutableList<StudentWithStatus> {
+        if(studentStatus == "all") {
+            return mapStudents(faculty, "all")
+        }
 
-        return faculty.students?.filter {student -> student.status ==  StudentStatus.valueOf(studentStatus)}
+        return mapStudents(faculty, studentStatus)
     }
 
+    fun mapStudents(faculty: Faculty, studentStatus: String): MutableList<StudentWithStatus> {
+        val studFacList: List<StudFac> = studFacRepository.findByFacid(faculty.id)
+        val students = faculty.students
+        val studentsWithStatus: MutableList<StudentWithStatus> = ArrayList()
+        for (student in students!!) {
+            val it: List<StudFac> = studFacList.filter { it -> it.studid == student.id }
+            val status = it[0].status
+            if(studentStatus === "all") {
+                val studentWithStatus = StudentWithStatus(
+                    student.id, student.email, student.firstName, student.lastName,
+                    student.father_initials, student.citizenship, student.phone, student.director, it[0].status
+                )
+                studentsWithStatus.add(studentWithStatus)
+            } else if(status === StudentStatus.valueOf(studentStatus)) {
+                val studentWithStatus = StudentWithStatus(
+                    student.id, student.email, student.firstName, student.lastName,
+                    student.father_initials, student.citizenship, student.phone, student.director, it[0].status
+                )
+                studentsWithStatus.add(studentWithStatus)
+            }
+        }
+        return studentsWithStatus
+    }
     fun parseFileToGetInfo(studentInfo: MultipartFile, faculty: Faculty): StudentDto {
         val fileContent = JSONObject(String(studentInfo.bytes))
         val fileContentResult: JSONArray = fileContent.getJSONArray("result")

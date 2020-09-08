@@ -14,8 +14,8 @@ data class Student(
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "stud_fac_table",
-        joinColumns = [JoinColumn(name = "stud_id", referencedColumnName = "id",  nullable = true)],
-        inverseJoinColumns = [JoinColumn(name = "fac_id", referencedColumnName = "id")]
+        joinColumns = [JoinColumn(name = "studid", referencedColumnName = "id",  nullable = true)],
+        inverseJoinColumns = [JoinColumn(name = "facid", referencedColumnName = "id")]
     )
     @JsonBackReference
     val faculties: MutableList<Faculty> = mutableListOf(),
@@ -33,9 +33,8 @@ data class Student(
 
     val phone: String,
 
-    val director: String,
+    val director: String
 
-    var status: StudentStatus
 )
 
 data class StudentDto(
@@ -64,7 +63,7 @@ fun StudentDto.toStudent(): Student {
     val s = this
     return Student(
         email = s.email,
-        status = StudentStatus.valueOf("REGISTERED"),
+//        status = StudentStatus.valueOf("REGISTERED"),
         faculties = s.faculties!!,
         firstName = s.firstName,
         lastName = s.lastName,
@@ -74,3 +73,23 @@ fun StudentDto.toStudent(): Student {
         director = s.director
     )
 }
+
+data class StudentWithStatus (
+    val id: UUID = UUID.randomUUID(),
+
+    val email: String,
+
+    val firstName: String,
+
+    val lastName: String,
+
+    val father_initials: String,
+
+    val citizenship: String,
+
+    val phone: String,
+
+    val director: String,
+
+    var status: StudentStatus
+)
